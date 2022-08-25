@@ -10,9 +10,16 @@
 <body>
     <form id="form1" runat="server">
         <div class="navbar">
-            <asp:Label ID="Label1" runat="server" Text="Invoice Module"></asp:Label>
-                
-            </div>
+            <ul>
+                <li style="font-size: 1.1em; font-weight:600"><a href="Party_List.aspx">Invoice Module</a></li>
+                <li><a href="Party_List.aspx">Party</a></li>
+                <li><a href="Product_List.aspx">Product</a></li>
+                <li><a href="Assign_party.aspx">Assign Party</a></li>
+                <li><a href="Product_Rate.aspx">Product Rate</a></li>
+                <li><a href="Invoice.aspx">Invoice</a></li>
+            </ul>
+
+        </div>
         <main style="width: 60%; margin: auto">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

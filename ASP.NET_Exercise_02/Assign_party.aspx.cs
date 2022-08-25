@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace ASP.NET_Exercise_02
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Assign_party : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,15 +17,16 @@ namespace ASP.NET_Exercise_02
             try
             {
                 con = new SqlConnection("data source=.; database=PartyDB; integrated security=SSPI");
-                String query = "select * from party order by party_name";
+                string query = "select assign_id, Party.Party_Name as party_name, Product.product_name as product_name from assign_party, party, product where(Party.party_id = assign_party.party_id) and(Product.product_id = assign_party.product_id);";
                 con.Open();
                 SqlDataAdapter sde = new SqlDataAdapter(query, con);
                 DataSet ds = new DataSet();
                 sde.Fill(ds);
                 PartyGrid.DataSource = ds;
                 PartyGrid.DataBind();
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 Response.Write(ex.Message);
             }
@@ -37,7 +38,7 @@ namespace ASP.NET_Exercise_02
 
         protected void Add_Party_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Party_Edit.aspx");
+            Server.Transfer("Assign_Party_Edit.aspx");
         }
     }
 }

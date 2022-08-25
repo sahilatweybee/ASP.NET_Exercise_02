@@ -2,19 +2,53 @@
     text-align: center;
     margin: 0;
     line-height: 2.5em;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-.navbar{
+
+a {
+    color: azure;
+    font-style: normal;
+    text-decoration: none;
+    color: grey;
+}
+
+.navbar {
     background-color: black;
     color: white;
+    display: flex;
+    justify-content: left;
 }
-h1{
+
+.navbar ul {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    list-style-type: none;
+    padding: 0.3em;
+    justify-content: left;
+}
+
+li {
+    margin-right: 20px;
+    color: gray;
+}
+a:hover{
+    color:white;
+}
+
+h1 {
     text-align: center;
 }
-.addBtn{
+
+.addBtn {
     float: right;
     background-color: goldenrod;
     color: white;
     border-radius: 0.3em;
-    border-color:goldenrod;
-    line-height: 2em;
+    border-color: goldenrod;
+    margin-bottom: 5px;
+}
+
+.table {
+    width: 100%;
 }

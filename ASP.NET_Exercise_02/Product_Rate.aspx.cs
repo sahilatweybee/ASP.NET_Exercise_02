@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace ASP.NET_Exercise_02
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Produce_Rate : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,15 +17,15 @@ namespace ASP.NET_Exercise_02
             try
             {
                 con = new SqlConnection("data source=.; database=PartyDB; integrated security=SSPI");
-                String query = "select * from party order by party_name";
+                string query = "select rate_id, product.product_name as product_name, rate, date_of_rate from rate, product where (product.product_id = rate.product_id);";
                 con.Open();
                 SqlDataAdapter sde = new SqlDataAdapter(query, con);
                 DataSet ds = new DataSet();
                 sde.Fill(ds);
-                PartyGrid.DataSource = ds;
-                PartyGrid.DataBind();
-                
-            }catch(Exception ex)
+                RateGrid.DataSource = ds;
+                RateGrid.DataBind();
+            }
+            catch (Exception ex)
             {
                 Response.Write(ex.Message);
             }
@@ -33,11 +33,6 @@ namespace ASP.NET_Exercise_02
             {
                 con.Close();
             }
-        }
-
-        protected void Add_Party_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Party_Edit.aspx");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ASP.NET_Exercise_02
 {
 
 
-    public partial class WebForm1
+    public partial class Assign_party
     {
 
         /// <summary>
