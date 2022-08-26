@@ -42,13 +42,15 @@ h1 {
 
 .addBtn {
     float: right;
-    background-color: goldenrod;
     color: white;
     border-radius: 0.3em;
-    border-color: goldenrod;
     margin-bottom: 5px;
 }
 
 .table {
     width: 100%;
+}
+
+.Btn-Border{
+    border-radius: 0.3em
 }

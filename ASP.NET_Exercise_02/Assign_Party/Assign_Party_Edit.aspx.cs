@@ -18,8 +18,9 @@ namespace ASP.NET_Exercise_02
                 SqlConnection con = null;
                 try
                 {
-                    //-------------------------------------initiaizing parties dataset-------------------------------//
                     con = new SqlConnection("data source =.; database = PartyDB; integrated security = SSPI");
+
+                    //-------------------------------------initiaizing parties dataset-------------------------------//
                     SqlCommand party_query = new SqlCommand("select * from party", con);
                     SqlDataAdapter party_adapter = new SqlDataAdapter(party_query);
                     DataSet parties = new DataSet();

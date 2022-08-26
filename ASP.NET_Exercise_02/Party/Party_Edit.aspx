@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Party_Edit.aspx.cs" Inherits="ASP.NET_Exercise_02.Party_Edit" Theme="Default_Theme" %>
+﻿<%@ Page Title="Party Edit" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Party_Edit.aspx.cs" Inherits="ASP.NET_Exercise_02.Party_Edit" Theme="Default_Theme" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Party Edit</h1>
     <br />

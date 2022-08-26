@@ -14,14 +14,8 @@ Default skin template. The following skins are provided as examples only.
 <asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
 --%>
 
-<asp:Button 
-        runat="server"
-        BorderStyle="Solid"  
-        Font-Size="1.2em" 
-        Height="1.5em"
-        SkinID="BtnUpdate" 
-        ForeColor="White"
-        BackColor="LimeGreen" 
-        BorderColor="LimeGreen"
-        style="border-radius: 0.3em;"/>
-
+<asp:DropDownList
+    runat="server"
+    Height="2em" 
+    Width="160px" 
+    style="border-radius: 0.3em"></asp:DropDownList>

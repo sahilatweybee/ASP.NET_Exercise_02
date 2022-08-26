@@ -39,5 +39,20 @@ namespace ASP.NET_Exercise_02
         {
             Response.Redirect("Party_Edit.aspx");
         }
+
+        protected void Alter_Party(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "EditParty")
+            {
+                GridViewRow row = PartyGrid.Rows[Convert.ToInt32(e.CommandArgument)];
+                int id = Convert.ToInt32(row.Cells[0].Text);
+                String name = row.Cells[1].Text;
+                Response.Redirect("party_Edit.aspx?party_id=" + id + "party_name=" + name);
+            } 
+            if (e.CommandName == "DeleteParty")
+            {
+
+            }
+        }
     }
 }

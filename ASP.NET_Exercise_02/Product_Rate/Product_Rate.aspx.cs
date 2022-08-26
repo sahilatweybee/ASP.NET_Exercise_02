@@ -17,7 +17,7 @@ namespace ASP.NET_Exercise_02
             try
             {
                 con = new SqlConnection("data source=.; database=PartyDB; integrated security=SSPI");
-                string query = "select rate_id, product.product_name as product_name, rate, date_of_rate from rate, product where (product.product_id = rate.product_id);";
+                string query = "select rate_id, product.product_name as product_name, rate, CONVERT(VARCHAR(10),date_of_rate,105) as date_of_rate from rate, product where (product.product_id = rate.product_id)";
                 con.Open();
                 SqlDataAdapter sde = new SqlDataAdapter(query, con);
                 DataSet ds = new DataSet();
@@ -33,6 +33,11 @@ namespace ASP.NET_Exercise_02
             {
                 con.Close();
             }
+        }
+
+        protected void Add_Party_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Product_Rate_Edit.aspx");
         }
     }
 }

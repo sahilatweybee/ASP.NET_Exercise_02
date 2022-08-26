@@ -11,17 +11,8 @@ namespace ASP.NET_Exercise_02
 {
 
 
-    public partial class Invoice
+    public partial class WebForm2
     {
-
-        /// <summary>
-        /// SelectParty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SelectParty;
 
         /// <summary>
         /// SelectProduct control.
@@ -51,30 +42,21 @@ namespace ASP.NET_Exercise_02
         protected global::System.Web.UI.WebControls.TextBox quantity_txtbox;
 
         /// <summary>
-        /// addInvoice control.
+        /// UpdateProductRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addInvoice;
+        protected global::System.Web.UI.WebControls.Button UpdateProductRate;
 
         /// <summary>
-        /// Invoice_View control.
+        /// CancelBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView Invoice_View;
-
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Button CancelBtn;
     }
 }
