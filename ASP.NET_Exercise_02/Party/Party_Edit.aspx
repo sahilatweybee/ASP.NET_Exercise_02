@@ -9,5 +9,5 @@
     <br />
     <asp:Button ID="UpdateParty" runat="server" Text="update" SkinID="BtnUpdate" OnClick="UpdateParty_Click"/>
     &nbsp;&nbsp;
-    <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel"/>
+    <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClick="CancelBtn_Click"/>
 </asp:Content>

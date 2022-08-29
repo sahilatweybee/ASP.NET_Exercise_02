@@ -13,13 +13,14 @@
         </tr>
         <tr>
             <td><asp:Label runat="server" Text="Product Name:" /></td>
-            <td><asp:DropDownList ID="SelectProduct" runat="server">
+            <td>
+                <asp:DropDownList ID="SelectProduct" runat="server">
                 </asp:DropDownList>
             </td>
         </tr>
     </table>
     <br />
-    <asp:Button ID="UpdateAssignParty" runat="server" Text="update" SkinID="BtnUpdate" OnClick="UpdateAssignParty_Click"/>
+    <asp:Button ID="UpdateAssignParty" runat="server" Text="update" SkinID="BtnUpdate" OnClick="UpdateAssignParty_Click" style="width: 57px"/>
     &nbsp;&nbsp;
-    <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel"/>
+    <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClick="CancelBtn_Click"/>
 </asp:Content>

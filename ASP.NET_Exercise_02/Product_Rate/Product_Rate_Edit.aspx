@@ -16,11 +16,11 @@
         </tr>
         <tr>
             <td><asp:Label runat="server" Text="Date:" /></td>
-            <td><asp:TextBox ID="quantity_txtbox" runat="server"></asp:TextBox></td>
+            <td><asp:TextBox ID="DateOfRate" runat="server"></asp:TextBox></td>
         </tr>
     </table>
     <br />
     <asp:Button ID="UpdateProductRate" runat="server" Text="update" SkinID="BtnUpdate" OnClick="UpdateProductRate_Click"/>
     &nbsp;&nbsp;
-    <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel"/>
+    <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClick="CancelBtn_Click"/>
 </asp:Content>

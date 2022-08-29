@@ -24,12 +24,12 @@ namespace ASP.NET_Exercise_02
         protected global::System.Web.UI.WebControls.Button Add_Party;
 
         /// <summary>
-        /// PartyGrid control.
+        /// ProductGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView PartyGrid;
+        protected global::System.Web.UI.WebControls.GridView ProductGrid;
     }
 }

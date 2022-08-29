@@ -33,13 +33,13 @@ namespace ASP.NET_Exercise_02
         protected global::System.Web.UI.WebControls.TextBox Curr_rate;
 
         /// <summary>
-        /// quantity_txtbox control.
+        /// DateOfRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox quantity_txtbox;
+        protected global::System.Web.UI.WebControls.TextBox DateOfRate;
 
         /// <summary>
         /// UpdateProductRate control.

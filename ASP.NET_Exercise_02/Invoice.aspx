@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Invoice" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Invoice.aspx.cs" Inherits="ASP.NET_Exercise_02.Invoice" Theme="Default_Theme" %>
+﻿<%@ Page Title="Invoice" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Invoice.aspx.cs" Inherits="ASP.NET_Exercise_02.Invoice" Theme="Default_Theme"  %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <h1>Invoice</h1>
     <br />
@@ -6,13 +6,13 @@
         <tr>
             <td><asp:Label runat="server" Text="Party Name:" /></td>
             <td>
-                <asp:DropDownList ID="SelectParty" runat="server">
+                <asp:DropDownList ID="SelectParty" runat="server" AutoPostBack="true" OnSelectedIndexChanged="SelectParty_SelectedIndexChanged">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
             <td><asp:Label runat="server" Text="Product Name:" /></td>
-            <td><asp:DropDownList ID="SelectProduct" runat="server">
+            <td><asp:DropDownList ID="SelectProduct" runat="server" OnSelectedIndexChanged="SelectProduct_SelectedIndexChanged">
                 </asp:DropDownList>
             </td>
         </tr>
@@ -32,7 +32,12 @@
         <HeaderStyle Font-Bold="True" HorizontalAlign="Left" VerticalAlign="Middle" />
         <RowStyle BorderStyle="None" HorizontalAlign="Left" />
         <Columns>
-            <%--<asp:BoundField--%> 
+            <asp:BoundField DataField="invoice_id" HeaderText="#" />
+            <asp:BoundField DataField="party_name" HeaderText="Party" />
+            <asp:BoundField DataField="product_name" HeaderText="Product" />
+            <asp:BoundField DataField="rate" HeaderText="Rate Of Product" />
+            <asp:BoundField DataField="quantity" HeaderText="Quantity" />
+            <asp:BoundField DataField="total" HeaderText="Total" />
         </Columns>
     </asp:GridView>
     <br />

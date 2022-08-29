@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Party List" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Party_List.aspx.cs" Inherits="ASP.NET_Exercise_02.WebForm1" Theme="Default_Theme" %>
+﻿<%@ Page Title="Party List" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Party_List.aspx.cs" Inherits="ASP.NET_Exercise_02.WebForm1" Theme="Default_Theme" MaintainScrollPositionOnPostback="true" %>
 <asp:Content ID="PartyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Party List</h1>
     <asp:Button ID="Add_Party" runat="server" Text="Add New Party" class="addBtn" OnClick="Add_Party_Click"  SkinID="Button" Height="2em" BorderStyle="Solid" />

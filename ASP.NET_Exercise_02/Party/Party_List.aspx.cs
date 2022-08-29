@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ASP.NET_Exercise_02
 {
@@ -16,7 +17,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source=.; database=PartyDB; integrated security=SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
                 String query = "select * from party order by party_name";
                 con.Open();
                 SqlDataAdapter sde = new SqlDataAdapter(query, con);
@@ -37,21 +38,39 @@ namespace ASP.NET_Exercise_02
 
         protected void Add_Party_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Party_Edit.aspx");
+            Response.Redirect("~/Party/Party_Edit.aspx");
         }
 
         protected void Alter_Party(object sender, GridViewCommandEventArgs e)
         {
+            GridViewRow row = PartyGrid.Rows[Convert.ToInt32(e.CommandArgument)];
+            int id = Convert.ToInt32(row.Cells[0].Text);
             if (e.CommandName == "EditParty")
             {
-                GridViewRow row = PartyGrid.Rows[Convert.ToInt32(e.CommandArgument)];
-                int id = Convert.ToInt32(row.Cells[0].Text);
-                String name = row.Cells[1].Text;
-                Response.Redirect("party_Edit.aspx?party_id=" + id + "party_name=" + name);
+                Response.Redirect("~/Party/party_Edit.aspx?ID=" + id);
             } 
             if (e.CommandName == "DeleteParty")
             {
-
+                SqlConnection con = null;
+                try
+                {
+                    con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
+                    
+                    con.Open();
+                    SqlCommand cm = new SqlCommand("PR_Delete_Party", con);
+                    cm.CommandType = CommandType.StoredProcedure;
+                    cm.Parameters.AddWithValue("party_id", id);
+                    cm.ExecuteNonQuery();
+                    Page_Load(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    Response.Write(ex.Message);
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
         }
     }
