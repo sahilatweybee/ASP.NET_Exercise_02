@@ -19,7 +19,5 @@ Default skin template. The following skins are provided as examples only.
         BorderStyle="Solid"         
         Font-Size="1.2em" 
         Height="1.5em"
-        BackColor="LimeGreen" 
         ForeColor="White"
-        BorderColor="LimeGreen"
         SkinID="Button" />

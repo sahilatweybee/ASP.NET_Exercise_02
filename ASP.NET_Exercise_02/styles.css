@@ -6,7 +6,6 @@
 }
 
 a {
-    color: azure;
     font-style: normal;
     text-decoration: none;
     color: grey;
@@ -19,7 +18,7 @@ a {
     justify-content: left;
 }
 
-.navbar ul {
+.header {
     width: 60%;
     margin: auto;
     display: flex;
@@ -28,13 +27,15 @@ a {
     justify-content: left;
 }
 
-li {
+.nav-link {
     margin-right: 20px;
     color: gray;
+    margin: auto 20px;
 }
-a:hover{
-    color:white;
-}
+    .nav-link:hover{
+        color:white;
+        cursor:pointer;
+    }
 
 h1 {
     text-align: center;
@@ -45,12 +46,40 @@ h1 {
     color: white;
     border-radius: 0.3em;
     margin-bottom: 5px;
+    background-color:lime;
+    border-color:lime;
 }
+
+    .addBtn:hover {
+        background-color: limegreen;
+        border-color: limegreen;
+    }
 
 .table {
     width: 100%;
 }
 
-.Btn-Border{
-    border-radius: 0.3em
+.btn-red {
+    border-radius: 0.3em;
+    background-color: red;
+    border-color: red;
 }
+    .btn-red:hover {
+        background-color: darkred;
+        border-color: darkred;
+    }
+
+.btn-edit {
+    border-radius: 0.3em;
+    color: #337ab7;
+}
+    .btn-edit:hover {
+        color: black;
+    }
+
+.btn{
+    border-radius: 0.3em;
+}
+    .btn:hover{
+        cursor:pointer;
+    }

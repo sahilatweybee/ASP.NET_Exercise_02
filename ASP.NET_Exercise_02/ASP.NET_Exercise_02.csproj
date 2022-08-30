@@ -69,7 +69,8 @@
   <ItemGroup>
     <Content Include="Assign_Party\Assign_party_List.aspx" />
     <Content Include="Assign_Party\Assign_Party_Edit.aspx" />
-    <Content Include="Invoice.aspx" />
+    <Content Include="Invoice\Invoice.aspx" />
+    <Content Include="Script.js" />
     <Content Include="Party\Party_Edit.aspx" />
     <Content Include="Product\Product_Edit.aspx" />
     <Content Include="Product\Product_List.aspx" />
@@ -94,11 +95,11 @@
     <Compile Include="Assign_Party\Assign_Party_Edit.aspx.designer.cs">
       <DependentUpon>Assign_Party_Edit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Invoice.aspx.cs">
+    <Compile Include="Invoice\Invoice.aspx.cs">
       <DependentUpon>Invoice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Invoice.aspx.designer.cs">
+    <Compile Include="Invoice\Invoice.aspx.designer.cs">
       <DependentUpon>Invoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="Party\Party_Edit.aspx.cs">

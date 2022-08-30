@@ -17,11 +17,11 @@ namespace ASP.NET_Exercise_02
             
             if (!IsPostBack)
             {
-                FillParties();
+                display_Data();
             }
         }
 
-        protected void FillParties()
+        protected void display_Data()
         {
             SqlConnection con = null;
             try
@@ -59,24 +59,24 @@ namespace ASP.NET_Exercise_02
                 con.Open();
                 SqlCommand cm = new SqlCommand("PR_Add_invoice", con);
                 cm.CommandType = CommandType.StoredProcedure;
-                cm.Parameters.AddWithValue("Party_id", SelectParty.SelectedValue);
-                cm.Parameters.AddWithValue("Product_id", SelectProduct.SelectedValue);
-                cm.Parameters.AddWithValue("Rate", rate);
-                cm.Parameters.AddWithValue("Quantity", quantity);
-                cm.Parameters.AddWithValue("Total", rate*quantity);
+                cm.Parameters.AddWithValue("@Party_id", SelectParty.SelectedValue);
+                cm.Parameters.AddWithValue("@Product_id", SelectProduct.SelectedValue);
+                cm.Parameters.AddWithValue("@Rate", rate);
+                cm.Parameters.AddWithValue("@Quantity", quantity);
+                cm.Parameters.AddWithValue("@Total", rate*quantity);
                 cm.ExecuteNonQuery();
-                string select_qury = "select top 1 party.party_name as party_name, product.product_name as product_name, rate_of_product as rate, quantity, total from invoice,party,product where invoice.party_id = party.party_id and invoice.product_id = product.product_id order by invoice_id desc";
+                string select_qury = "select top 1 invoice.invoice_id as invoice_id, party.party_name as party_name, product.product_name as product_name, invoice.rate_of_product as rate, invoice.quantity as quantity, invoice.total as total from invoice,party,product where invoice.party_id = party.party_id and invoice.product_id = product.product_id order by invoice_id desc";
                 SqlCommand display = new SqlCommand(select_qury, con);
-                SqlDataAdapter sde = new SqlDataAdapter(cm);
+                SqlDataAdapter sde = new SqlDataAdapter(display);
                 DataSet ds = new DataSet();
                 sde.Fill(ds);
                 Invoice_View.DataSource = ds;
                 Invoice_View.DataBind();
-
+                lbltotal.Text = ds.Tables[0].Compute("sum(total)", string.Empty).ToString();
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                LblError.Text = ex.Message;
             }
             finally
             {
@@ -103,7 +103,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                LblError.Text = ex.Message;
             }
             finally
             {
@@ -113,7 +113,25 @@ namespace ASP.NET_Exercise_02
 
         protected void SelectProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
+                SqlCommand cm = new SqlCommand($"select top 1 rate from rate where product_id = {SelectProduct.SelectedValue} order by date_of_rate desc", con);
+                con.Open();
+                SqlDataReader sdr = cm.ExecuteReader();
+                sdr.Read();
+                Curr_rate.Text = sdr["rate"].ToString();
+                Curr_rate.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                LblError.Text = ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
 }

@@ -14,18 +14,22 @@ namespace ASP.NET_Exercise_02
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillData();
+            if (!IsPostBack)
+            {
+                display_Data();
+            }
         }
 
-        private void FillData()
+        private void display_Data()
         {
             SqlConnection con = null;
             try
             {
                 con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                string query = "select rate_id, product.product_name as product_name, rate, CONVERT(VARCHAR(10),date_of_rate,105) as date_of_rate from rate, product where (product.product_id = rate.product_id)";
                 con.Open();
-                SqlDataAdapter sde = new SqlDataAdapter(query, con);
+                SqlCommand cm = new SqlCommand("PR_Select_Rate", con);
+                cm.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter sde = new SqlDataAdapter(cm);
                 DataSet ds = new DataSet();
                 sde.Fill(ds);
                 RateGrid.DataSource = ds;
@@ -33,7 +37,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                lblError.Text = ex.Message;
             }
             finally
             {
@@ -45,39 +49,40 @@ namespace ASP.NET_Exercise_02
         {
             Response.Redirect("Product_Rate_Edit.aspx");
         }
-
-        protected void RateGrid_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void BtnDelete_Click(object sender, EventArgs e)
         {
-            GridViewRow row = RateGrid.Rows[Convert.ToInt32(e.CommandArgument)];
-            int id = Convert.ToInt32(row.Cells[0].Text);
-            if (e.CommandName == "EditRate")
+            int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+            int id = Convert.ToInt32(RateGrid.Rows[rowindex].Cells[0].Text);
+            string confirmDelete = Request.Form["confirm_delete"];
+            SqlConnection con = null;
+            if (confirmDelete == "Yes")
             {
-                
-                Response.Redirect("Product_Rate_Edit.aspx?ID=" + id);
-            }
-            if (e.CommandName == "DeleteRate")
-            {
-                SqlConnection con = null;
                 try
                 {
                     con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-
-                    con.Open();
                     SqlCommand cm = new SqlCommand("PR_Delete_Rate", con);
                     cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("Rate_id", id);
+                    cm.Parameters.AddWithValue("@Rate_id", id);
+                    con.Open();
                     cm.ExecuteNonQuery();
-                    Page_Load(sender, e);
+                    display_Data();
                 }
                 catch (Exception ex)
                 {
-                    Response.Write(ex.Message);
+                    lblError.Text = ex.Message;
                 }
                 finally
                 {
                     con.Close();
                 }
             }
+        }
+
+        protected void BtnEdit_Click(object sender, EventArgs e)
+        {
+            int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+            int id = Convert.ToInt32(RateGrid.Rows[rowindex].Cells[0].Text);
+            Response.Redirect("Product_Rate_Edit.aspx?ID=" + id);
         }
     }
 }

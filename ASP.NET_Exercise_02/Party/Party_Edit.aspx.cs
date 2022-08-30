@@ -70,7 +70,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                lblError.Text = ex.Message;
             }
             finally
             {
@@ -80,7 +80,12 @@ namespace ASP.NET_Exercise_02
 
         protected void CancelBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Party/Party_List.aspx");
+            string confirmExit = Request.Form["confirm_exit"];
+            if (confirmExit == "Yes")
+            {
+                Response.Redirect("~/Party/Party_List.aspx");
+            }
+            
         }
     }
 }

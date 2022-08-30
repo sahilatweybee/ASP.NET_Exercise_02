@@ -14,18 +14,22 @@ namespace ASP.NET_Exercise_02
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillData();
+            if (!IsPostBack)
+            {
+                display_Data();
+            }
         }
 
-        protected void FillData()
+        protected void display_Data()
         {
             SqlConnection con = null;
             try
             {
                 con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                string query = "select assign_id, Party.Party_Name as party_name, Product.product_name as product_name from assign_party, party, product where(Party.party_id = assign_party.party_id) and(Product.product_id = assign_party.product_id);";
                 con.Open();
-                SqlDataAdapter sde = new SqlDataAdapter(query, con);
+                SqlCommand cm = new SqlCommand("PR_Select_Assign", con);
+                cm.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter sde = new SqlDataAdapter(cm);
                 DataSet ds = new DataSet();
                 sde.Fill(ds);
                 AssignPartyGrid.DataSource = ds;
@@ -34,7 +38,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception ex)
             {
-                Response.Write(ex.Message);
+                lblError.Text = ex.Message;
             }
             finally
             {
@@ -46,32 +50,27 @@ namespace ASP.NET_Exercise_02
         {
             Response.Redirect("~/Assign_Party/Assign_Party_Edit.aspx");
         }
-
-        protected void AssignPartyGrid_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void BtnDelete_Click(object sender, EventArgs e)
         {
-            GridViewRow row = AssignPartyGrid.Rows[Convert.ToInt32(e.CommandArgument)];
-            int id = Convert.ToInt32(row.Cells[0].Text);
-            if (e.CommandName == "EditAssign")
+            int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+            int id = Convert.ToInt32(AssignPartyGrid.Rows[rowindex].Cells[0].Text);
+            string confirmDelete = Request.Form["confirm_delete"];
+            SqlConnection con = null;
+            if (confirmDelete == "Yes")
             {
-                Response.Redirect("~/Assign_Party/Assign_Party_Edit.aspx?ID=" + id);
-            }
-            if (e.CommandName == "DeleteAssign")
-            {
-                SqlConnection con = null;
                 try
                 {
                     con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-
-                    con.Open();
                     SqlCommand cm = new SqlCommand("PR_Delete_Assign", con);
                     cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("Assign_id", id);
+                    cm.Parameters.AddWithValue("@Assign_id", id);
+                    con.Open();
                     cm.ExecuteNonQuery();
-                    Page_Load(sender, e);
+                    display_Data();
                 }
                 catch (Exception ex)
                 {
-                    Response.Write(ex.Message);
+                    lblError.Text = ex.Message;
                 }
                 finally
                 {
@@ -79,5 +78,12 @@ namespace ASP.NET_Exercise_02
                 }
             }
         }
+
+        protected void BtnEdit_Click(object sender, EventArgs e)
+        {
+            int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
+            int id = Convert.ToInt32(AssignPartyGrid.Rows[rowindex].Cells[0].Text);
+            Response.Redirect("~/Assign_Party/Assign_Party_Edit.aspx?ID=" + id);
+        }
     }
-}
+} 

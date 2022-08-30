@@ -6,24 +6,32 @@
 <head runat="server">
     <title></title>
     <link href="styles.css" rel="stylesheet" type="text/css" />
+    <script src="Script.js"></script>
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="navbar">
-            <ul>
-                <li style="font-size: 1.1em; font-weight: 600"><a href="Party_List.aspx">Invoice Module</a></li>
-                <li><a href="<%= Page.ResolveUrl("~/Party/Party_List.aspx") %>">Party</a></li>
-                <li><a href="<%= Page.ResolveUrl("~/Product/Product_List.aspx") %>">Product</a></li>
-                <li><a href="<%= Page.ResolveUrl("~/Assign_Party/Assign_party_List.aspx") %>">Assign Party</a></li>
-                <li><a href="<%= Page.ResolveUrl("~/Product_Rate/Product_Rate_List.aspx") %>">Product Rate</a></li>
-                <li><a href="<%= Page.ResolveUrl("~/Invoice.aspx") %>">Invoice</a></li>
-            </ul>
-
+            <header class="header">
+                <asp:LinkButton  runat="server" Style="color:gray; font-size: 1.1em; font-weight: 600" PostBackUrl="~/Party/Party_List.aspx" Text="Invoice Module"></asp:LinkButton>
+                &nbsp;
+                <asp:LinkButton ID="btnParty" CssClass="nav-link" runat="server" PostBackUrl="~/Party/Party_List.aspx" Text="Party" OnClientClick="click"></asp:LinkButton>
+                &nbsp;
+                <asp:LinkButton ID="btnProduct" CssClass="nav-link" runat="server" PostBackUrl="~/Product/Product_List.aspx" Text="Product" OnClientClick="click"></asp:LinkButton>
+                &nbsp;
+                <asp:LinkButton ID="btnAssign" CssClass="nav-link" runat="server" PostBackUrl="~/Assign_Party/Assign_party_List.aspx" Text="Assign Party" OnClientClick="click"></asp:LinkButton>
+                &nbsp;
+                <asp:LinkButton ID="btnRate" CssClass="nav-link" runat="server" PostBackUrl="~/Product_Rate/Product_Rate_List.aspx" Text="Product Rate" OnClientClick="click"></asp:LinkButton>
+                &nbsp;
+                <asp:LinkButton ID="btnInvoice" CssClass="nav-link" runat="server" PostBackUrl="~/Invoice/Invoice.aspx" Text="Invoice"></asp:LinkButton>
+            </header>
         </div>
         <main style="width: 60%; margin: auto">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </main>
     </form>
+    
 </body>
 </html>

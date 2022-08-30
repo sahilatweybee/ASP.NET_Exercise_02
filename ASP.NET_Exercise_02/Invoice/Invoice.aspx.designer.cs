@@ -15,6 +15,15 @@ namespace ASP.NET_Exercise_02
     {
 
         /// <summary>
+        /// LblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblError;
+
+        /// <summary>
         /// SelectParty control.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace ASP.NET_Exercise_02
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView Invoice_View;
+
+        /// <summary>
+        /// lbltotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbltotal;
 
         /// <summary>
         /// Label1 control.
