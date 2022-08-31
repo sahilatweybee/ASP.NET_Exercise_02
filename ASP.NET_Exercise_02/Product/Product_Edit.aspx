@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Product Edit" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Product_Edit.aspx.cs" Inherits="ASP.NET_Exercise_02.Product_Edit" Theme="Default_Theme" %>
 <asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server" Visible="false">
-    <script src="../Script.js"></script>
+    <script src="../scripts/Script.js"></script>
 </asp:Content> 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

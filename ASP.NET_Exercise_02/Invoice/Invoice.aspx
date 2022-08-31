@@ -27,7 +27,7 @@
         </tr>
     </table>
     <br />
-    <asp:Button ID="addInvoice" runat="server" Text="Add to Invoice" SkinID="Button" OnClick="addInvoice_Click" style="border-radius:0.3em" CssClass="addBtn btn" />
+    <asp:Button ID="addInvoice" runat="server" Text="Add to Invoice" OnClick="addInvoice_Click" CssClass="addBtn btn" Height="1.5em" Font-Size="1.2em" BorderStyle="Solid" style="float:none"/>
     <br />
     <asp:GridView ID="Invoice_View" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%">
         <HeaderStyle Font-Bold="True" HorizontalAlign="Left" VerticalAlign="Middle" />
@@ -45,5 +45,5 @@
     <asp:Label ID="lbltotal" runat="server" style="float: right; margin-right:20px;" Text=""></asp:Label>
     <asp:Label ID="Label1" runat="server" Text="Grand Total:" style="float: right; margin-right:20px"></asp:Label>
     <br />
-    <asp:Button runat="server" Text="Close Invoice" SkinID="BtnClose" style="margin-right:20px"/>
+    <asp:Button ID="btnCloseInvoice" runat="server" Text="Close Invoice" SkinID="BtnClose" OnClick="btnCloseInvoice_Click"/>
 </asp:Content>

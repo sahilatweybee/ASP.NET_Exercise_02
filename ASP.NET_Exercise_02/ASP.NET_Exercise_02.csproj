@@ -70,12 +70,12 @@
     <Content Include="Assign_Party\Assign_party_List.aspx" />
     <Content Include="Assign_Party\Assign_Party_Edit.aspx" />
     <Content Include="Invoice\Invoice.aspx" />
-    <Content Include="Script.js" />
+    <Content Include="scripts\Script.js" />
     <Content Include="Party\Party_Edit.aspx" />
     <Content Include="Product\Product_Edit.aspx" />
     <Content Include="Product\Product_List.aspx" />
     <Content Include="Product_Rate\Product_Rate_List.aspx" />
-    <Content Include="styles.css" />
+    <Content Include="App_Themes\css\styles.css" />
     <Content Include="Web.config" />
     <Content Include="Party\Party_List.aspx" />
     <Content Include="Product_Rate\Product_Rate_Edit.aspx" />

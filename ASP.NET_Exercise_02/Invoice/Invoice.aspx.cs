@@ -12,9 +12,9 @@ namespace ASP.NET_Exercise_02
 {
     public partial class Invoice : System.Web.UI.Page
     {
+        //private DataTable ds = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             if (!IsPostBack)
             {
                 display_Data();
@@ -45,44 +45,6 @@ namespace ASP.NET_Exercise_02
             {
                 con.Close();
             }
-        }
-
-        protected void addInvoice_Click(object sender, EventArgs e)
-        {
-            int rate = Convert.ToInt32(Curr_rate.Text);
-            int quantity = Convert.ToInt32(quantity_txtbox.Text);
-
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                con.Open();
-                SqlCommand cm = new SqlCommand("PR_Add_invoice", con);
-                cm.CommandType = CommandType.StoredProcedure;
-                cm.Parameters.AddWithValue("@Party_id", SelectParty.SelectedValue);
-                cm.Parameters.AddWithValue("@Product_id", SelectProduct.SelectedValue);
-                cm.Parameters.AddWithValue("@Rate", rate);
-                cm.Parameters.AddWithValue("@Quantity", quantity);
-                cm.Parameters.AddWithValue("@Total", rate*quantity);
-                cm.ExecuteNonQuery();
-                string select_qury = "select top 1 invoice.invoice_id as invoice_id, party.party_name as party_name, product.product_name as product_name, invoice.rate_of_product as rate, invoice.quantity as quantity, invoice.total as total from invoice,party,product where invoice.party_id = party.party_id and invoice.product_id = product.product_id order by invoice_id desc";
-                SqlCommand display = new SqlCommand(select_qury, con);
-                SqlDataAdapter sde = new SqlDataAdapter(display);
-                DataSet ds = new DataSet();
-                sde.Fill(ds);
-                Invoice_View.DataSource = ds;
-                Invoice_View.DataBind();
-                lbltotal.Text = ds.Tables[0].Compute("sum(total)", string.Empty).ToString();
-            }
-            catch (Exception ex)
-            {
-                LblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
-                                  
         }
 
         protected void SelectParty_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,6 +85,7 @@ namespace ASP.NET_Exercise_02
                 sdr.Read();
                 Curr_rate.Text = sdr["rate"].ToString();
                 Curr_rate.Enabled = false;
+                quantity_txtbox.Focus();
             }
             catch (Exception ex)
             {
@@ -132,6 +95,93 @@ namespace ASP.NET_Exercise_02
             {
                 con.Close();
             }
+        }
+
+        protected void addInvoice_Click(object sender, EventArgs e)
+        {
+            int rate = Convert.ToInt32(Curr_rate.Text);
+            int quantity = Convert.ToInt32(quantity_txtbox.Text);
+
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
+                con.Open();
+                SqlCommand cm = new SqlCommand("PR_Add_invoice", con);
+                cm.CommandType = CommandType.StoredProcedure;
+                cm.Parameters.AddWithValue("@Party_id", SelectParty.SelectedValue);
+                cm.Parameters.AddWithValue("@Product_id", SelectProduct.SelectedValue);
+                cm.Parameters.AddWithValue("@Rate", rate);
+                cm.Parameters.AddWithValue("@Quantity", quantity);
+                cm.Parameters.AddWithValue("@Total", rate * quantity);
+                cm.ExecuteNonQuery();
+                Display_Invoice();
+                SelectProduct.SelectedValue = "0";
+            }
+            catch (Exception ex)
+            {
+                LblError.Text = ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        protected void Display_Invoice()
+        {
+            SqlConnection con = null;
+            try
+            {
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
+                con.Open();
+                SqlCommand display = new SqlCommand("PR_Select_Invoice", con);
+                display.CommandType = CommandType.StoredProcedure;
+                display.Parameters.AddWithValue("@party_id", SelectParty.SelectedValue);
+                //SqlDataReader sdr = display.ExecuteReader();
+                //ds.Columns.Add("invoice_id");
+                //ds.Columns.Add("party_name");
+                //ds.Columns.Add("product_name");
+                //ds.Columns.Add("rate");
+                //ds.Columns.Add("quantity");
+                //ds.Columns.Add("total");
+                //sdr.Read();
+                //var id = sdr["invoice_id"].ToString();
+                //var party = sdr["party_name"].ToString();
+                //var product = sdr["product_name"].ToString();
+                //var prate = sdr["rate"].ToString();
+                //var pquantity = sdr["quantity"].ToString();
+                //var ptotal = Convert.ToInt64(sdr["total"]);
+                //DataRow dt = ds.NewRow();
+                //ds.Rows.Add(id, party, product, prate, pquantity, ptotal);
+                SqlDataAdapter sde = new SqlDataAdapter(display);
+                DataSet ds = new DataSet();
+                sde.Fill(ds);
+                Invoice_View.DataSource = ds;
+                Invoice_View.DataBind();
+                lbltotal.Text = ds.Tables[0].AsEnumerable().Sum(x => Convert.ToInt32(x["total"])).ToString();
+            }
+            catch (Exception ex)
+            {
+                LblError.Text = ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        protected void btnCloseInvoice_Click(object sender, EventArgs e)
+        {
+            Invoice_View.DataSource = null;
+            Invoice_View.DataBind();
+            lbltotal.Text = "";
+            SelectParty.SelectedValue = "0";
+            SelectProduct.SelectedValue = "0";
+            Invoice_View.Visible = SelectParty.Enabled = true;
+            Invoice_View.Visible = Curr_rate.Enabled = true;
+            quantity_txtbox.Text = "";
         }
     }
 }

@@ -20,4 +20,5 @@ Default skin template. The following skins are provided as examples only.
         Font-Size="1.2em" 
         Height="1.5em"
         ForeColor="White"
-        SkinID="Button" />
+        SkinID="Button"
+        CssClass="btn"/>

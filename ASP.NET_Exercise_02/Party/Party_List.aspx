@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="Party List" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Party_List.aspx.cs" Inherits="ASP.NET_Exercise_02.WebForm1" Theme="Default_Theme" MaintainScrollPositionOnPostback="true" %>
 <asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server" Visible="false">
-    <script src="../Script.js"></script>
+    <script src="../scripts/Script.js"></script>
 </asp:Content> 
 
 <asp:Content ID="PartyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Party List</h1>
     <asp:Label ID="lblError" runat="server" Font-Size="Small" Text=""></asp:Label>
-    <asp:Button ID="Add_Party" runat="server" Text="Add New Party" CssClass="addBtn btn" OnClick="Add_Party_Click"  SkinID="Button" Height="2em" BorderStyle="Solid" />
+    <asp:Button ID="Add_Party" runat="server" Text="Add New Party" CssClass="addBtn btn" OnClick="Add_Party_Click" Height="2em" BorderStyle="Solid" />
         <asp:GridView ID="PartyGrid" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%">
         <Columns>
             <asp:BoundField DataField="party_id" HeaderText="#" />

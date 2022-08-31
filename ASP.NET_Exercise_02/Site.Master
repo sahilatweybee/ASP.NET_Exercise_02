@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <title></title>
-    <link href="styles.css" rel="stylesheet" type="text/css" />
+    <link href="App_Themes/css/styles.css" rel="stylesheet" />
     <script src="Script.js"></script>
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>

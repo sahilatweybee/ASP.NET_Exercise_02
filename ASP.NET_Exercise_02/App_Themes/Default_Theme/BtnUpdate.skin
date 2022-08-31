@@ -21,7 +21,6 @@ Default skin template. The following skins are provided as examples only.
         Height="1.5em"
         SkinID="BtnUpdate" 
         ForeColor="White"
-        BackColor="LimeGreen" 
-        BorderColor="LimeGreen"
-        style="border-radius: 0.3em;"/>
+        CssClass="btn addBtn"
+        style="float: none"/>
 

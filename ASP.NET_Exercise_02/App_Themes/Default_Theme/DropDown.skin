@@ -18,4 +18,4 @@ Default skin template. The following skins are provided as examples only.
     runat="server"
     Height="2em" 
     Width="160px" 
-    style="border-radius: 0.3em"></asp:DropDownList>
+    CssClass="btn"></asp:DropDownList>
