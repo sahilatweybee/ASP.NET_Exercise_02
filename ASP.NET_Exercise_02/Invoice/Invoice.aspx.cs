@@ -75,6 +75,7 @@ namespace ASP.NET_Exercise_02
 
         protected void SelectProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Curr_rate.Enabled = false;
             SqlConnection con = null;
             try
             {
@@ -84,7 +85,6 @@ namespace ASP.NET_Exercise_02
                 SqlDataReader sdr = cm.ExecuteReader();
                 sdr.Read();
                 Curr_rate.Text = sdr["rate"].ToString();
-                Curr_rate.Enabled = false;
                 quantity_txtbox.Focus();
             }
             catch (Exception ex)
@@ -130,6 +130,7 @@ namespace ASP.NET_Exercise_02
 
         protected void Display_Invoice()
         {
+            SelectParty.Enabled = false;
             SqlConnection con = null;
             try
             {
