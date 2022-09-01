@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ASP.NET_Exercise_02
 {
@@ -17,6 +18,7 @@ namespace ASP.NET_Exercise_02
             {
                 if (Request.QueryString["ID"] != null)
                 {
+                    Update.Text = "Update";
                     FillTextBox();
                 }
             }
@@ -27,7 +29,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source =.; database = PartyDB; integrated security = SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
                 SqlCommand cm = new SqlCommand($"select product_name from product where product_id={Request.QueryString["ID"]}", con);
                 con.Open();
                 SqlDataReader sdr = cm.ExecuteReader();
@@ -48,7 +50,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source =.; database = PartyDB; integrated security = SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
                 SqlCommand cm = null;
                 if (Request.QueryString["ID"] != null)
                 {
@@ -56,12 +58,14 @@ namespace ASP.NET_Exercise_02
                     cm.CommandType = CommandType.StoredProcedure;
                     cm.Parameters.AddWithValue("product_id", Convert.ToInt32(Request.QueryString["ID"]));
                     cm.Parameters.AddWithValue("product_name", Product_name.Text.ToString());
+                    lblError.Text = "Product Updated SuccessFully";
                 }
                 else
                 {
                     cm = new SqlCommand("PR_Add_Product", con);
                     cm.CommandType = CommandType.StoredProcedure;
                     cm.Parameters.AddWithValue("product_name", Product_name.Text.ToString());
+                    lblError.Text = "Product Added SuccessFully";
                 }
                 con.Open();
                 cm.ExecuteNonQuery();

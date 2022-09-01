@@ -20,6 +20,7 @@ namespace ASP.NET_Exercise_02
                 FillDropDownList();
                 if(Request.QueryString["ID"] != null)
                 {
+                    Update.Text = "Update";
                     FillData();
                 }
             }
@@ -57,7 +58,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source =.; database = PartyDB; integrated security = SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
                 SqlCommand cm = new SqlCommand($"select product_id,rate, convert(varchar(10),date_of_rate, 105) as date_of_rate from rate where rate_id={Request.QueryString["ID"]}", con);
                 con.Open();
                 SqlDataReader sdr = cm.ExecuteReader();
@@ -68,7 +69,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception e)
             {
-                Response.Write(e.Message);
+                lblError.Text = e.Message;
             }
             finally
             {
@@ -82,7 +83,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source =.; database=PartyDB; integrated security = SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
                 SqlCommand cm = null;
                 if (Request.QueryString["ID"] != null)
                 {
@@ -92,6 +93,7 @@ namespace ASP.NET_Exercise_02
                     cm.Parameters.AddWithValue("Product_id", Convert.ToInt32(SelectProduct.SelectedValue));
                     cm.Parameters.AddWithValue("Rate", Convert.ToInt32(Curr_rate.Text));
                     cm.Parameters.AddWithValue("DateOfRate", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
+                    lblError.Text = "Record Updated SuccessFully";
                 }
                 else
                 {
@@ -100,13 +102,14 @@ namespace ASP.NET_Exercise_02
                     cm.Parameters.AddWithValue("product_id", Convert.ToInt32(SelectProduct.SelectedValue));
                     cm.Parameters.AddWithValue("rate", Convert.ToInt32(Curr_rate.Text));
                     cm.Parameters.AddWithValue("Date", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
+                    lblError.Text = "Record Added SuccessFully";
                 }
                 con.Open();
                 cm.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                lblError.Text = "Threre is already an entry with same details\n" + ex.Message;
             }
             finally
             {
@@ -121,6 +124,15 @@ namespace ASP.NET_Exercise_02
             {
                 Response.Redirect("~/Product_Rate/Product_Rate_List.aspx");
             }
+        }
+
+        protected void Show_calander_Click(object sender, ImageClickEventArgs e)
+        {
+            Calendar.Visible = !Calendar.Visible;
+        }
+
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
         }
     }
 }

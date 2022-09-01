@@ -30,8 +30,9 @@
     <asp:Button ID="addInvoice" runat="server" Text="Add to Invoice" OnClick="addInvoice_Click" CssClass="addBtn btn" Height="1.5em" Font-Size="1.2em" BorderStyle="Solid" style="float:none"/>
     <br />
     <asp:GridView ID="Invoice_View" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%">
-        <HeaderStyle Font-Bold="True" HorizontalAlign="Left" VerticalAlign="Middle" />
-        <RowStyle BorderStyle="None" HorizontalAlign="Left" />
+        <HeaderStyle BackColor="#666666" ForeColor="White" Font-Bold="true" HorizontalAlign="Center" VerticalAlign="Middle"  />
+        <AlternatingRowStyle BackColor="#cccccc" BorderColor="#cccccc"/>
+        <RowStyle BackColor="White" BorderColor="White" BorderStyle="None" HorizontalAlign="Left" />
         <Columns>
             <asp:BoundField DataField="invoice_id" HeaderText="#" />
             <asp:BoundField DataField="party_name" HeaderText="Party" />

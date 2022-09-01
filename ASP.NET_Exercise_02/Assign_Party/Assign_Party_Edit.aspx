@@ -26,7 +26,7 @@
         </tr>
     </table>
     <br />
-    <asp:Button ID="UpdateAssignParty" runat="server" Text="update" SkinID="BtnUpdate" OnClick="UpdateAssignParty_Click" style="width: 57px"/>
+    <asp:Button ID="Update" runat="server" Text="Add" SkinID="BtnUpdate" OnClick="UpdateAssignParty_Click" style="width: 57px"/>
     &nbsp;&nbsp;
     <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClientClick="ConfirmExit()" OnClick="CancelBtn_Click"/>
 </asp:Content>

@@ -53,7 +53,7 @@ namespace ASP.NET_Exercise_02
             try
             {
                 con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand product_query = new SqlCommand($"select product.product_id as product_id, product.product_name as product_name from product,assign_party where product.product_id=assign_party.product_id and assign_party.party_id = {Convert.ToInt32(SelectParty.SelectedValue)}", con);
+                SqlCommand product_query = new SqlCommand($"select distinct product.product_id as product_id, product.product_name as product_name from product,assign_party,rate where product.product_id=assign_party.product_id and rate.product_id=product.product_id and assign_party.party_id = {Convert.ToInt32(SelectParty.SelectedValue)}", con);
                 SqlDataAdapter product_adapter = new SqlDataAdapter(product_query);
                 DataSet products = new DataSet();
                 product_adapter.Fill(products);
@@ -139,22 +139,6 @@ namespace ASP.NET_Exercise_02
                 SqlCommand display = new SqlCommand("PR_Select_Invoice", con);
                 display.CommandType = CommandType.StoredProcedure;
                 display.Parameters.AddWithValue("@party_id", SelectParty.SelectedValue);
-                //SqlDataReader sdr = display.ExecuteReader();
-                //ds.Columns.Add("invoice_id");
-                //ds.Columns.Add("party_name");
-                //ds.Columns.Add("product_name");
-                //ds.Columns.Add("rate");
-                //ds.Columns.Add("quantity");
-                //ds.Columns.Add("total");
-                //sdr.Read();
-                //var id = sdr["invoice_id"].ToString();
-                //var party = sdr["party_name"].ToString();
-                //var product = sdr["product_name"].ToString();
-                //var prate = sdr["rate"].ToString();
-                //var pquantity = sdr["quantity"].ToString();
-                //var ptotal = Convert.ToInt64(sdr["total"]);
-                //DataRow dt = ds.NewRow();
-                //ds.Rows.Add(id, party, product, prate, pquantity, ptotal);
                 SqlDataAdapter sde = new SqlDataAdapter(display);
                 DataSet ds = new DataSet();
                 sde.Fill(ds);

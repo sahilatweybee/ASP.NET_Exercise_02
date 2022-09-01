@@ -6,25 +6,22 @@
 <asp:Content ID="PartyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Party List</h1>
     <asp:Label ID="lblError" runat="server" Font-Size="Small" Text=""></asp:Label>
-    <asp:Button ID="Add_Party" runat="server" Text="Add New Party" CssClass="addBtn btn" OnClick="Add_Party_Click" Height="2em" BorderStyle="Solid" />
+    <asp:ImageButton ImageUrl="~/Images/add_box_FILL0_wght500_GRAD200_opsz48.png" style="float:right" ImageAlign="AbsMiddle" runat="server"  CssClass="btn" ID="Add_Party" runat="server" Text="Add New Party"  OnClick="Add_Party_Click" />
         <asp:GridView ID="PartyGrid" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%">
-        <Columns>
-            <asp:BoundField DataField="party_id" HeaderText="#" />
-            <asp:BoundField DataField="party_name" HeaderText="Party Name" />
-            <asp:TemplateField HeaderText="Edit" ShowHeader="False">
+            <HeaderStyle BackColor="#666666" ForeColor="White" Font-Bold="true" HorizontalAlign="Center" VerticalAlign="Middle"  />
+            <AlternatingRowStyle BackColor="#cccccc" BorderColor="#cccccc"/>
+            <RowStyle BackColor="White" BorderColor="White" BorderStyle="None" HorizontalAlign="Left" />
+            <Columns>
+                <asp:BoundField DataField="party_id" HeaderText="#" ItemStyle-HorizontalAlign="Center"/>
+                <asp:BoundField DataField="party_name" HeaderText="Party Name" />
+                <asp:TemplateField HeaderText="Actions" ShowHeader="False">
+                <ItemStyle HorizontalAlign="Center" />
+                <ControlStyle Height="2em" />
                 <ItemTemplate>
-                    <asp:Button ID="btnEdit" CssClass="btn-edit btn" runat="server" CausesValidation="false" CommandArgument='<%# Eval("party_id") %>' CommandName="Edit" Text="Edit" OnClick="BtnEdit_Click" />
-                </ItemTemplate>
-                <ControlStyle BackColor="SkyBlue" BorderColor="SkyBlue" BorderStyle="Solid" Height="2.5em" />
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Delete" ShowHeader="False">
-                <ControlStyle ForeColor="White" BorderStyle="Solid" Height="2.5em"  />
-                <ItemTemplate>
-                    <asp:Button ID="btnDelete" CssClass="btn btn-red" runat="server" CausesValidation="false" CommandArgument='<%# Eval("party_id") %>' OnClientClick="ConfirmDelete()" CommandName="Delete" Text="Delete" OnClick="BtnDelete_Click" />
+                    <asp:ImageButton ID="btnEdit" style="vertical-align:text-bottom;" ImageUrl="~/Images/edit_square_FILL0_wght500_GRAD200_opsz40.png" runat="server" CausesValidation="false" CommandArgument='<%# Eval("party_id") %>' CommandName="Edit" OnClick="BtnEdit_Click" />
+                    <asp:ImageButton ID="btnDelete" style="vertical-align:text-bottom;" ImageUrl="~/Images/delete_forever_FILL0_wght500_GRAD200_opsz40.png" runat="server" CausesValidation="false" ForeColor="White" CommandArgument='<%# Eval("party_id") %>' OnClientClick="ConfirmDelete()" CommandName="Delete" OnClick="BtnDelete_Click" />
                 </ItemTemplate>
             </asp:TemplateField>
-        </Columns>
-        <HeaderStyle Font-Bold="True" HorizontalAlign="Left" VerticalAlign="Middle" />
-        <RowStyle BorderStyle="None" HorizontalAlign="Left" />
+            </Columns>
     </asp:GridView>
 </asp:Content>

@@ -30,7 +30,7 @@ namespace ASP.NET_Exercise_02
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Add_Party;
+        protected global::System.Web.UI.WebControls.ImageButton Add_Party;
 
         /// <summary>
         /// ProductGrid control.

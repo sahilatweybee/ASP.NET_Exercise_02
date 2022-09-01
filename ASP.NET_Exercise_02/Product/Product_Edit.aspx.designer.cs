@@ -33,13 +33,13 @@ namespace ASP.NET_Exercise_02
         protected global::System.Web.UI.WebControls.TextBox Product_name;
 
         /// <summary>
-        /// UpdateProduct control.
+        /// Update control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateProduct;
+        protected global::System.Web.UI.WebControls.Button Update;
 
         /// <summary>
         /// CancelBtn control.

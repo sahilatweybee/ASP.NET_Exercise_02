@@ -7,25 +7,29 @@
     <h1>Product Rate Edit</h1>
     <asp:Label ID="lblError" runat="server" Font-Size="Small" Text=""></asp:Label>
     <br />
-    <table style="width: 30%; margin: auto; text-align: right;">
+    <table style=" margin: auto; ">
         <tr>
-            <td><asp:Label runat="server" Text="Product Name:" /></td>
+            <td text-align: right;><asp:Label runat="server" Text="Product Name:" /></td>
             <td>
                 <asp:DropDownList ID="SelectProduct" runat="server">
                 </asp:DropDownList> 
             </td>
         </tr>
         <tr>
-            <td><asp:Label runat="server" Text="Current Rate:" /></td>
+            <td text-align: right;><asp:Label runat="server" Text="Current Rate:" /></td>
             <td><asp:TextBox ID="Curr_rate" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
-            <td><asp:Label runat="server" Text="Date:" /></td>
-            <td><asp:TextBox ID="DateOfRate" runat="server"></asp:TextBox></td>
+            <td text-align: right;><asp:Label runat="server" Text="Date:" /></td>
+            <td>
+                <asp:TextBox ID="DateOfRate" runat="server"></asp:TextBox>
+                <asp:ImageButton ID="Show_calander" runat="server" Height="1.7em" ImageUrl="~/Images/calendar_month_FILL0_wght300_GRAD200_opsz40.png" OnClick="Show_calander_Click"  />
+                <asp:Calendar ID="Calendar" runat="server" Visible="false"></asp:Calendar>
+            </td>
         </tr>
     </table>
     <br />
-    <asp:Button ID="UpdateProductRate" runat="server" Text="update" SkinID="BtnUpdate" OnClick="UpdateProductRate_Click"/>
+    <asp:Button ID="Update" runat="server" Text="Add" SkinID="BtnUpdate" OnClick="UpdateProductRate_Click"/>
     &nbsp;&nbsp;
     <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClientClick="ConfirmExit()" OnClick="CancelBtn_Click"/>
 </asp:Content>

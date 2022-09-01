@@ -76,6 +76,10 @@ namespace ASP.NET_Exercise_02
                     con.Close();
                 }
             }
+            else
+            {
+                display_Data();
+            }
         }
 
         protected void BtnEdit_Click(object sender, EventArgs e)

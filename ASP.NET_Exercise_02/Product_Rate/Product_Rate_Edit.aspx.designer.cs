@@ -51,13 +51,31 @@ namespace ASP.NET_Exercise_02
         protected global::System.Web.UI.WebControls.TextBox DateOfRate;
 
         /// <summary>
-        /// UpdateProductRate control.
+        /// Show_calander control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button UpdateProductRate;
+        protected global::System.Web.UI.WebControls.ImageButton Show_calander;
+
+        /// <summary>
+        /// Calendar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar Calendar;
+
+        /// <summary>
+        /// Update control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Update;
 
         /// <summary>
         /// CancelBtn control.

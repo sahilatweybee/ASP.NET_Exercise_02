@@ -12,7 +12,7 @@
     <asp:TextBox ID="Product_name" runat="server">abc</asp:TextBox>
     <br />
     <br />
-    <asp:Button ID="UpdateProduct" runat="server" Text="update" SkinID="BtnUpdate" OnClick="UpdateProduct_Click"/>
+    <asp:Button ID="Update" runat="server" Text="Add" SkinID="BtnUpdate" OnClick="UpdateProduct_Click"/>
     &nbsp;&nbsp;
     <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClientClick="ConfirmExit()" OnClick="CancelBtn_Click"/>
 </asp:Content>

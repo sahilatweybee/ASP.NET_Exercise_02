@@ -46,14 +46,7 @@ h1 {
     color: white;
     border-radius: 0.3em;
     margin-bottom: 5px;
-    background-color:lime;
-    border-color:lime;
 }
-
-    .addBtn:hover {
-        background-color: limegreen;
-        border-color: limegreen;
-    }
 
 .table {
     width: 100%;
@@ -63,18 +56,23 @@ h1 {
     border-radius: 0.3em;
     background-color: red;
     border-color: red;
+    color: white;
+
 }
     .btn-red:hover {
         background-color: darkred;
         border-color: darkred;
+        cursor: pointer;
     }
 
 .btn-edit {
     border-radius: 0.3em;
     color: #337ab7;
+    border-radius: 0.3em;
 }
     .btn-edit:hover {
         color: black;
+        cursor: pointer;
     }
 
 .btn{

@@ -18,7 +18,7 @@ namespace ASP.NET_Exercise_02
             {
                 btnParty.ForeColor = Color.White;
             }
-            if (ac_page.StartsWith("/Product")) 
+            if (ac_page.StartsWith("/Product/")) 
             {
                 btnProduct.ForeColor = Color.White;
             }

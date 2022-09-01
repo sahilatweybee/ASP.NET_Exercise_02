@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace ASP.NET_Exercise_02
 {
@@ -19,6 +20,7 @@ namespace ASP.NET_Exercise_02
                 FillDropDownLists();
                 if (Request.QueryString["ID"] != null)
                 {
+                    Update.Text = "Update";
                     FillData();
                 }
             }
@@ -29,7 +31,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source =.; database = PartyDB; integrated security = SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
 
                 //-------------------------------------initiaizing parties dataset-------------------------------//
                 SqlCommand party_query = new SqlCommand("select * from party", con);
@@ -71,7 +73,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source =.; database = PartyDB; integrated security = SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
                 SqlCommand cm = new SqlCommand($"select * from assign_party where assign_id = {Request.QueryString["ID"]}", con);
                 con.Open();
                 SqlDataReader sdr = cm.ExecuteReader();
@@ -94,7 +96,7 @@ namespace ASP.NET_Exercise_02
             SqlConnection con = null;
             try
             {
-                con = new SqlConnection("data source =.; database=PartyDB; integrated security = SSPI");
+                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
                 SqlCommand cm = null;
                 if (Request.QueryString["ID"] != null)
                 {
@@ -103,6 +105,7 @@ namespace ASP.NET_Exercise_02
                     cm.Parameters.AddWithValue("assign_id", Request.QueryString["ID"]);
                     cm.Parameters.AddWithValue("party_id", SelectParty.SelectedValue);
                     cm.Parameters.AddWithValue("product_id", SelectProduct.SelectedValue);
+                    lblError.Text = "Record Updated SuccessFully";
                 }
                 else
                 {
@@ -110,6 +113,7 @@ namespace ASP.NET_Exercise_02
                     cm.CommandType = CommandType.StoredProcedure;
                     cm.Parameters.AddWithValue("party_id", SelectParty.SelectedValue);
                     cm.Parameters.AddWithValue("product_id", SelectProduct.SelectedValue);
+                    lblError.Text = "Party Assigned SuccessFully";
                 }
                 con.Open();
                 cm.ExecuteNonQuery();

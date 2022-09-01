@@ -69,6 +69,10 @@
   <ItemGroup>
     <Content Include="Assign_Party\Assign_party_List.aspx" />
     <Content Include="Assign_Party\Assign_Party_Edit.aspx" />
+    <Content Include="Images\add_box_FILL0_wght500_GRAD200_opsz48.png" />
+    <Content Include="Images\calendar_month_FILL0_wght300_GRAD200_opsz40.png" />
+    <Content Include="Images\delete_forever_FILL0_wght500_GRAD200_opsz40.png" />
+    <Content Include="Images\edit_square_FILL0_wght500_GRAD200_opsz40.png" />
     <Content Include="Invoice\Invoice.aspx" />
     <Content Include="scripts\Script.js" />
     <Content Include="Party\Party_Edit.aspx" />
