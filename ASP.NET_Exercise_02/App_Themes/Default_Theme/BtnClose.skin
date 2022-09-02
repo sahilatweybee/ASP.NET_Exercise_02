@@ -19,6 +19,6 @@ Default skin template. The following skins are provided as examples only.
         BorderStyle="Solid"         
         Font-Size="1.2em" 
         Height="1.5em"
-        CssClass="btn btn-red" 
+        CssClass="btn-red" 
         ForeColor="White"
         SkinID="BtnClose" />

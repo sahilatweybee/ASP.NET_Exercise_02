@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
+using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -28,104 +27,78 @@ namespace ASP.NET_Exercise_02
 
         protected void FillDropDownLists()
         {
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
+            string party_query = "PR_Select_Party";
+            DataTable parties = Base_Connection_Class.Select_Query(party_query);
+            SelectParty.DataSource = parties;
+            SelectParty.DataTextField = "party_name";
+            SelectParty.DataValueField = "party_id";
+            SelectParty.DataBind();
+            SelectParty.Items.Insert(0, new ListItem("Select Party", "0"));
 
-                //-------------------------------------initiaizing parties dataset-------------------------------//
-                SqlCommand party_query = new SqlCommand("select * from party", con);
-                SqlDataAdapter party_adapter = new SqlDataAdapter(party_query);
-                DataSet parties = new DataSet();
-                party_adapter.Fill(parties);
-
-                //-------------------------------------initiaizing products dataset-------------------------------//
-                SqlCommand product_query = new SqlCommand("select * from product", con);
-                SqlDataAdapter product_adapter = new SqlDataAdapter(product_query);
-                DataSet products = new DataSet();
-                product_adapter.Fill(products);
-
-                //-------------------------------------binding datasets--------------------------------------------//
-                SelectParty.DataSource = parties;
-                SelectParty.DataTextField = "party_name";
-                SelectParty.DataValueField = "party_id";
-                SelectParty.DataBind();
-                SelectParty.Items.Insert(0, new ListItem("Select Party", "0"));
-
-                SelectProduct.DataSource = products;
-                SelectProduct.DataTextField = "product_name";
-                SelectProduct.DataValueField = "product_id";
-                SelectProduct.DataBind();
-                SelectProduct.Items.Insert(0, new ListItem("Select Product", "0"));
-            }
-            catch (Exception ex)
-            {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
+            string product_query = "PR_Select_Product";
+            DataTable products = Base_Connection_Class.Select_Query(product_query);
+            SelectProduct.DataSource = products;
+            SelectProduct.DataTextField = "product_name";
+            SelectProduct.DataValueField = "product_id";
+            SelectProduct.DataBind();
+            SelectProduct.Items.Insert(0, new ListItem("Select Product", "0"));
+            
         }
 
         private void FillData()
         {
-            SqlConnection con = null;
-            try
+            int id = Convert.ToInt32(Request.QueryString["ID"]);
+            Dictionary<string, string> str = Base_Connection_Class.Get_Assigned_Record(id);
+            if(str["error"] == "")
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand cm = new SqlCommand($"select * from assign_party where assign_id = {Request.QueryString["ID"]}", con);
-                con.Open();
-                SqlDataReader sdr = cm.ExecuteReader();
-                sdr.Read();
-                SelectParty.SelectedValue = sdr["party_id"].ToString();
-                SelectProduct.SelectedValue = sdr["product_id"].ToString();
+                SelectParty.SelectedValue = str["party"];
+                SelectProduct.SelectedValue = str["product"];
             }
-            catch (Exception e)
+            else
             {
-                Response.Write(e.Message);
+                lblError.Text = "There is some error in fetching record you selected!!" + str["error"];
             }
-            finally
-            {
-                con.Close();
-            }
+            
         }
 
         protected void UpdateAssignParty_Click(object sender, EventArgs e)
         {
-            SqlConnection con = null;
-            try
+            string query = "";
+            string error = "";
+            Dictionary<string, string> parameters;
+            if (Request.QueryString["ID"] != null)
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand cm = null;
-                if (Request.QueryString["ID"] != null)
+                query = "PR_Update_Assign_Party";
+                parameters = new Dictionary<string, string>();
+                parameters.Add("assign_id", Request.QueryString["ID"]);
+                parameters.Add("party_id", SelectParty.SelectedValue);
+                parameters.Add("product_id", SelectProduct.SelectedValue);
+                error = Base_Connection_Class.Insert_Update_Query(query, parameters);
+                if (error == "")
                 {
-                    cm = new SqlCommand("PR_Update_Assign_Party", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("assign_id", Request.QueryString["ID"]);
-                    cm.Parameters.AddWithValue("party_id", SelectParty.SelectedValue);
-                    cm.Parameters.AddWithValue("product_id", SelectProduct.SelectedValue);
-                    lblError.Text = "Record Updated SuccessFully";
+                    lblError.Text = "Updated SuccessFully";
                 }
                 else
                 {
-                    cm = new SqlCommand("PR_Assign_Party", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("party_id", SelectParty.SelectedValue);
-                    cm.Parameters.AddWithValue("product_id", SelectProduct.SelectedValue);
-                    lblError.Text = "Party Assigned SuccessFully";
+                    lblError.Text = "Unable to update this Record!!!";
                 }
-                con.Open();
-                cm.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            else
             {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
+                query = "PR_Assign_Party";
+                parameters = new Dictionary<string, string>();
+                parameters.Add("party_id", SelectParty.SelectedValue);
+                parameters.Add("product_id", SelectProduct.SelectedValue);
+                error = Base_Connection_Class.Insert_Update_Query(query, parameters);
+                if (error == "")
+                {
+                    lblError.Text = "Product Added SuccessFully";
+                }
+                else
+                {
+                    lblError.Text = "Unable to Add Product!!!";
+                }
+            }      
         }
 
         protected void CancelBtn_Click(object sender, EventArgs e)
@@ -134,6 +107,10 @@ namespace ASP.NET_Exercise_02
             if (confirmExit == "Yes")
             {
                 Response.Redirect("~/Assign_Party/Assign_Party_List.aspx");
+            }
+            else
+            {
+                FillDropDownLists();
             }
         }
     }

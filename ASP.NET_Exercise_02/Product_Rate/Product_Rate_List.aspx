@@ -8,14 +8,14 @@
     <asp:Label ID="lblError" runat="server" Font-Size="Small" Text=""></asp:Label>
     <asp:ImageButton ImageUrl="~/Images/add_box_FILL0_wght500_GRAD200_opsz48.png" style="float:right" ImageAlign="AbsMiddle" runat="server"  CssClass="btn" OnClick="Add_Party_Click" Text="Add New aproductRate" ID="Add_Party"/>
     <asp:GridView ID="RateGrid" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%">
-        <HeaderStyle BackColor="#666666" ForeColor="White" Font-Bold="true" HorizontalAlign="Center" VerticalAlign="Middle"  />
-        <AlternatingRowStyle BackColor="#cccccc" BorderColor="#cccccc"/>
-        <RowStyle BackColor="White" BorderColor="White" BorderStyle="None" HorizontalAlign="Left" />
+        <HeaderStyle BackColor="DarkSlateBlue" BorderColor="DarkSlateBlue" ForeColor="White" Font-Bold="true" VerticalAlign="Middle"  />
+        <AlternatingRowStyle BackColor="LightBlue" BorderColor="LightBlue"/>
+        <RowStyle BackColor="LightCyan" BorderColor="LightCyan" BorderStyle="None" HorizontalAlign="Left" VerticalAlign="Middle" Height="1.5em"/>
         <Columns>
             <asp:BoundField DataField="rate_id" HeaderText="#" ItemStyle-HorizontalAlign="Center"/>
-            <asp:BoundField DataField="product_name" HeaderText="Product Name" />
-            <asp:BoundField DataField="rate" HeaderText="Rate" />
-            <asp:BoundField DataField="date_of_rate" HeaderText="Date of Rate" />
+            <asp:BoundField DataField="product_name" HeaderText="Product Name" HeaderStyle-HorizontalAlign="Left"/>
+            <asp:BoundField DataField="rate" HeaderText="Rate" HeaderStyle-HorizontalAlign="Left"/>
+            <asp:BoundField DataField="date_of_rate" HeaderText="Date of Rate" HeaderStyle-HorizontalAlign="Left"/>
             <asp:TemplateField HeaderText="Actions" ShowHeader="False">
                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Bottom" Height="1em"/>
                 <ControlStyle Height="2em"/>

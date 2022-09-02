@@ -4,9 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
+using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -26,60 +24,46 @@ namespace ASP.NET_Exercise_02
 
         private void FillTextBox()
         {
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand cm = new SqlCommand($"select party_name from party where party_id={Request.QueryString["ID"]}", con);
-                con.Open();
-                SqlDataReader sdr = cm.ExecuteReader();
-                sdr.Read();
-                Party_name.Text = sdr["party_name"].ToString();
-            }
-            catch (Exception e)
-            {
-                Response.Write(e.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            string name = Request.QueryString["name"];
+            Party_name.Text = name;
         }
 
         protected void UpdateParty_Click(object sender, EventArgs e)
         {
-            SqlConnection con = null;
-            try
+            string query = "";
+            string error ="";
+            Dictionary<string, string> parameters;
+            if(Request.QueryString["ID"] != null)
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand cm = null;
-                if(Request.QueryString["ID"] != null)
+                query = "PR_Update_Party";
+                parameters = new Dictionary<string, string>();
+                parameters.Add("party_id", Request.QueryString["ID"].ToString());
+                parameters.Add("party_name", Party_name.Text.ToString());
+                error = Base_Connection_Class.Insert_Update_Query(query, parameters);
+                if(error == "")
                 {
-                    cm = new SqlCommand("PR_Update_Party", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("party_id", Convert.ToInt32(Request.QueryString["ID"].ToString()));
-                    cm.Parameters.AddWithValue("party_name", Party_name.Text.ToString());
                     lblError.Text = "Party Updated SuccessFully";
                 }
                 else
                 {
-                    cm = new SqlCommand("PR_Add_Party", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("party_name", Party_name.Text.ToString());
-                    lblError.Text = "Party Added SuccessFully";
+                    lblError.Text = "Unable to Update this Party!!! There is already a party with the same name.";
                 }
-                con.Open();
-                cm.ExecuteNonQuery();
-                Response.Redirect("~/Party/Party_List.aspx");
             }
-            catch (Exception ex)
+            else
             {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
+                query = "PR_Add_Party";
+                parameters = new Dictionary<string, string>();
+                parameters.Add("@Party_name", Party_name.Text.ToString());
+                error = Base_Connection_Class.Insert_Update_Query(query, parameters);
+                if (error == "")
+                {
+                    lblError.Text = "Party Added Successfully";
+                }
+                else
+                {
+                    lblError.Text = "Unable to add Party!!! There is already a Party with the same name.";
+                }
+            }   
         }
 
         protected void CancelBtn_Click(object sender, EventArgs e)
@@ -89,7 +73,10 @@ namespace ASP.NET_Exercise_02
             {
                 Response.Redirect("~/Party/Party_List.aspx");
             }
-            
+            else
+            {
+                Page_Load(sender, e);
+            }
         }
     }
 }

@@ -22,17 +22,16 @@ a {
     width: 60%;
     margin: auto;
     display: flex;
-    list-style-type: none;
     padding: 0.3em;
     justify-content: left;
 }
 
-.nav-link {
+.nav--link {
     margin-right: 20px;
     color: gray;
     margin: auto 20px;
 }
-    .nav-link:hover{
+    .nav--link:hover{
         color:white;
         cursor:pointer;
     }
@@ -42,14 +41,21 @@ h1 {
 }
 
 .addBtn {
-    float: right;
     color: white;
+    background-color: lime;
+    border-color: lime;
     border-radius: 0.3em;
     margin-bottom: 5px;
 }
+    .addBtn:hover {
+        background-color: limegreen;
+        border-color: limegreen;
+        cursor:pointer;
+    }
 
 .table {
     width: 100%;
+    
 }
 
 .btn-red {

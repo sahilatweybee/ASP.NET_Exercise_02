@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -26,58 +27,45 @@ namespace ASP.NET_Exercise_02
 
         private void FillTextBox()
         {
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand cm = new SqlCommand($"select product_name from product where product_id={Request.QueryString["ID"]}", con);
-                con.Open();
-                SqlDataReader sdr = cm.ExecuteReader();
-                sdr.Read();
-                Product_name.Text = sdr["product_name"].ToString();
-            }
-            catch (Exception e)
-            {
-                Response.Write(e.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            Product_name.Text = Request.QueryString["name"];
         }
         protected void UpdateProduct_Click(object sender, EventArgs e)
         {
-            SqlConnection con = null;
-            try
+            string query = "";
+            string error = "";
+            Dictionary<string, string> parameters;
+            if (Request.QueryString["ID"] != null)
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand cm = null;
-                if (Request.QueryString["ID"] != null)
+                query = "PR_Update_Product";
+                parameters = new Dictionary<string, string>();
+                parameters.Add("@product_id", Request.QueryString["ID"]);
+                parameters.Add("@product_name", Product_name.Text.ToString());
+                error = Base_Connection_Class.Insert_Update_Query(query, parameters);
+                if(error == "")
                 {
-                    cm = new SqlCommand("PR_Update_Product", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("product_id", Convert.ToInt32(Request.QueryString["ID"]));
-                    cm.Parameters.AddWithValue("product_name", Product_name.Text.ToString());
                     lblError.Text = "Product Updated SuccessFully";
                 }
                 else
                 {
-                    cm = new SqlCommand("PR_Add_Product", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("product_name", Product_name.Text.ToString());
+                    lblError.Text = "Unable to update Product!!!";
+                }
+            }
+            else
+            {
+                query = "PR_Add_Product";
+                parameters = new Dictionary<string, string>();;
+                parameters.Add("@product_name", Product_name.Text.ToString());
+                error = Base_Connection_Class.Insert_Update_Query(query, parameters);
+                if (error == "")
+                {
                     lblError.Text = "Product Added SuccessFully";
                 }
-                con.Open();
-                cm.ExecuteNonQuery();
+                else
+                {
+                    lblError.Text = "Unable to Add Product!!!";
+                }
             }
-            catch (Exception ex)
-            {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
+            
         }
 
         protected void CancelBtn_Click(object sender, EventArgs e)
@@ -86,6 +74,10 @@ namespace ASP.NET_Exercise_02
             if (confirmExit == "Yes")
             {
                 Response.Redirect("~/Product/Product_List.aspx");
+            }
+            else
+            {
+                Page_Load(sender, e);
             }
         }
     }

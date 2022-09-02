@@ -13,9 +13,8 @@ Default skin template. The following skins are provided as examples only.
 
 <asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
 --%>
-
-<asp:TextBox 
-    runat="server"
-    Height="1.7em" 
-    Width="150px" 
-    style="border-radius: 0.3em;"></asp:TextBox>
+<asp:LinkButton 
+CssClass="nav--link" runat="server"
+Font-Underline="false" 
+ForeColor="Gray" 
+SkinID="HeaderLink"></asp:LinkButton>

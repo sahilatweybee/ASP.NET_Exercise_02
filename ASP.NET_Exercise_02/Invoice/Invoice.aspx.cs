@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -23,78 +24,32 @@ namespace ASP.NET_Exercise_02
 
         protected void display_Data()
         {
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand party_query = new SqlCommand("select * from party", con);
-                SqlDataAdapter party_adapter = new SqlDataAdapter(party_query);
-                DataSet parties = new DataSet();
-                party_adapter.Fill(parties);
-                SelectParty.DataSource = parties;
-                SelectParty.DataTextField = "party_name";
-                SelectParty.DataValueField = "party_id";
-                SelectParty.DataBind();
-                SelectParty.Items.Insert(0, new ListItem("--Select Party--", "0"));
-            }
-            catch (Exception e)
-            {
-                Response.Write(e.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            DataTable parties = Base_Connection_Class.Select_Query("PR_Select_Party");
+            SelectParty.DataSource = parties;
+            SelectParty.DataTextField = "party_name";
+            SelectParty.DataValueField = "party_id";
+            SelectParty.DataBind();
+            SelectParty.Items.Insert(0, new ListItem("--Select Party--", "0"));
         }
 
         protected void SelectParty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand product_query = new SqlCommand($"select distinct product.product_id as product_id, product.product_name as product_name from product,assign_party,rate where product.product_id=assign_party.product_id and rate.product_id=product.product_id and assign_party.party_id = {Convert.ToInt32(SelectParty.SelectedValue)}", con);
-                SqlDataAdapter product_adapter = new SqlDataAdapter(product_query);
-                DataSet products = new DataSet();
-                product_adapter.Fill(products);
-                SelectProduct.DataSource = products;
-                SelectProduct.DataTextField = "product_name";
-                SelectProduct.DataValueField = "product_id";
-                SelectProduct.DataBind();
-                SelectProduct.Items.Insert(0, new ListItem("--Select Product--", "0"));
-            }
-            catch (Exception ex)
-            {
-                LblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
+            int id = Convert.ToInt32(SelectParty.SelectedValue);
+            DataTable products = Base_Connection_Class.Get_Products_By_party(id);
+            SelectProduct.DataSource = products;
+            SelectProduct.DataTextField = "product_name";
+            SelectProduct.DataValueField = "product_id";
+            SelectProduct.DataBind();
+            SelectProduct.Items.Insert(0, new ListItem("--Select Product--", "0"));
         }
 
         protected void SelectProduct_SelectedIndexChanged(object sender, EventArgs e)
         {
             Curr_rate.Enabled = false;
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                SqlCommand cm = new SqlCommand($"select top 1 rate from rate where product_id = {SelectProduct.SelectedValue} order by date_of_rate desc", con);
-                con.Open();
-                SqlDataReader sdr = cm.ExecuteReader();
-                sdr.Read();
-                Curr_rate.Text = sdr["rate"].ToString();
-                quantity_txtbox.Focus();
-            }
-            catch (Exception ex)
-            {
-                LblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
+            int id = Convert.ToInt32(SelectProduct.SelectedValue);
+            string rate = Base_Connection_Class.Get_Rate(id);
+            Curr_rate.Text = rate;
+            quantity_txtbox.Focus();
         }
 
         protected void addInvoice_Click(object sender, EventArgs e)
@@ -102,58 +57,38 @@ namespace ASP.NET_Exercise_02
             int rate = Convert.ToInt32(Curr_rate.Text);
             int quantity = Convert.ToInt32(quantity_txtbox.Text);
 
-            SqlConnection con = null;
-            try
+                string query = "PR_Add_invoice";
+                Dictionary<string, string> parameters = new Dictionary<string, string>(); 
+                parameters.Add("@Party_id", SelectParty.SelectedValue);
+                parameters.Add("@Product_id", SelectProduct.SelectedValue);
+                parameters.Add("@Rate", rate.ToString());
+                parameters.Add("@Quantity", quantity.ToString());
+                parameters.Add("@Total", (rate * quantity).ToString());
+                string error = Base_Connection_Class.Insert_Update_Query(query, parameters);
+                
+            if(error == "")
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                con.Open();
-                SqlCommand cm = new SqlCommand("PR_Add_invoice", con);
-                cm.CommandType = CommandType.StoredProcedure;
-                cm.Parameters.AddWithValue("@Party_id", SelectParty.SelectedValue);
-                cm.Parameters.AddWithValue("@Product_id", SelectProduct.SelectedValue);
-                cm.Parameters.AddWithValue("@Rate", rate);
-                cm.Parameters.AddWithValue("@Quantity", quantity);
-                cm.Parameters.AddWithValue("@Total", rate * quantity);
-                cm.ExecuteNonQuery();
                 Display_Invoice();
                 SelectProduct.SelectedValue = "0";
+                Curr_rate.Text = "";
+                quantity_txtbox.Text = "";
             }
-            catch (Exception ex)
+            else
             {
-                LblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
+                LblError.Text = error;
             }
         }
 
         protected void Display_Invoice()
         {
             SelectParty.Enabled = false;
-            SqlConnection con = null;
-            try
-            {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                con.Open();
-                SqlCommand display = new SqlCommand("PR_Select_Invoice", con);
-                display.CommandType = CommandType.StoredProcedure;
-                display.Parameters.AddWithValue("@party_id", SelectParty.SelectedValue);
-                SqlDataAdapter sde = new SqlDataAdapter(display);
-                DataSet ds = new DataSet();
-                sde.Fill(ds);
-                Invoice_View.DataSource = ds;
-                Invoice_View.DataBind();
-                lbltotal.Text = ds.Tables[0].AsEnumerable().Sum(x => Convert.ToInt32(x["total"])).ToString();
-            }
-            catch (Exception ex)
-            {
-                LblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
+            string query = "PR_Select_Invoice";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("@party_id", SelectParty.SelectedValue);
+            DataTable ds = Base_Connection_Class.Show_Invoice(query, parameters);
+            Invoice_View.DataSource = ds;
+            Invoice_View.DataBind();
+            lbltotal.Text = ds.AsEnumerable().Sum(x => Convert.ToInt32(x["total"])).ToString();
 
         }
 

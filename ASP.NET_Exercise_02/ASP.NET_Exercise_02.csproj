@@ -85,6 +85,7 @@
     <Content Include="Product_Rate\Product_Rate_Edit.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Base_Connection_Class.cs" />
     <Compile Include="Assign_Party\Assign_party_List.aspx.cs">
       <DependentUpon>Assign_party_List.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,6 +165,7 @@
     <Content Include="App_Themes\Default_Theme\DropDown.skin" />
     <Content Include="App_Themes\Default_Theme\TextBox.skin" />
     <Content Include="App_Themes\Default_Theme\BtnClose.skin" />
+    <Content Include="App_Themes\Default_Theme\HeaderLink.skin" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">

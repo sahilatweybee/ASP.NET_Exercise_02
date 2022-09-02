@@ -5,8 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
+using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -22,26 +21,16 @@ namespace ASP.NET_Exercise_02
 
         private void display_Data()
         {
-            SqlConnection con = null;
             try
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                con.Open();
-                SqlCommand cm = new SqlCommand("PR_Select_Rate", con);
-                cm.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter sde = new SqlDataAdapter(cm);
-                DataSet ds = new DataSet();
-                sde.Fill(ds);
+                string query = "PR_Select_Rate";
+                DataTable ds = Base_Connection_Class.Select_Query(query);
                 RateGrid.DataSource = ds;
                 RateGrid.DataBind();
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
+                lblError.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message;
             }
         }
 
@@ -54,27 +43,12 @@ namespace ASP.NET_Exercise_02
             int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
             int id = Convert.ToInt32(RateGrid.Rows[rowindex].Cells[0].Text);
             string confirmDelete = Request.Form["confirm_delete"];
-            SqlConnection con = null;
             if (confirmDelete == "Yes")
             {
-                try
-                {
-                    con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                    SqlCommand cm = new SqlCommand("PR_Delete_Rate", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("@Rate_id", id);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    display_Data();
-                }
-                catch (Exception ex)
-                {
-                    lblError.Text = ex.Message;
-                }
-                finally
-                {
-                    con.Close();
-                }
+                string query = "PR_Delete_Rate";
+                string param_name = "@Rate_id";
+                Base_Connection_Class.Delete_Query(query, param_name, id);
+                display_Data();
             }
             else
             {
@@ -86,7 +60,9 @@ namespace ASP.NET_Exercise_02
         {
             int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
             int id = Convert.ToInt32(RateGrid.Rows[rowindex].Cells[0].Text);
-            Response.Redirect("Product_Rate_Edit.aspx?ID=" + id);
+            int rate = Convert.ToInt32(RateGrid.Rows[rowindex].Cells[2].Text);
+            string date = RateGrid.Rows[rowindex].Cells[3].Text;
+            Response.Redirect($"Product_Rate_Edit.aspx?ID={id}&rate={rate}&date={date}");
         }
     }
 }

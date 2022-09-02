@@ -5,8 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
+using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -22,16 +21,10 @@ namespace ASP.NET_Exercise_02
 
         protected void display_Data()
         {
-            SqlConnection con = null;
             try
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                con.Open();
-                SqlCommand cm = new SqlCommand("PR_Select_Assign", con);
-                cm.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter sde = new SqlDataAdapter(cm);
-                DataSet ds = new DataSet();
-                sde.Fill(ds);
+                string query = "PR_Select_Assign";
+                DataTable ds = Base_Connection_Class.Select_Query(query);
                 AssignPartyGrid.DataSource = ds;
                 AssignPartyGrid.DataBind();
 
@@ -39,10 +32,6 @@ namespace ASP.NET_Exercise_02
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
             }
         }
 
@@ -55,26 +44,18 @@ namespace ASP.NET_Exercise_02
             int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
             int id = Convert.ToInt32(AssignPartyGrid.Rows[rowindex].Cells[0].Text);
             string confirmDelete = Request.Form["confirm_delete"];
-            SqlConnection con = null;
             if (confirmDelete == "Yes")
             {
                 try
                 {
-                    con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                    SqlCommand cm = new SqlCommand("PR_Delete_Assign", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("@Assign_id", id);
-                    con.Open();
-                    cm.ExecuteNonQuery();
+                    string query = "PR_Delete_Assign";
+                    string param_name = "@Assign_id";
+                    Base_Connection_Class.Delete_Query(query, param_name, id);
                     display_Data();
                 }
                 catch (Exception ex)
                 {
-                    lblError.Text = ex.Message;
-                }
-                finally
-                {
-                    con.Close();
+                    lblError.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message;
                 }
             }
         }
@@ -83,7 +64,7 @@ namespace ASP.NET_Exercise_02
         {
             int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
             int id = Convert.ToInt32(AssignPartyGrid.Rows[rowindex].Cells[0].Text);
-            Response.Redirect("~/Assign_Party/Assign_Party_Edit.aspx?ID=" + id);
+            Response.Redirect($"~/Assign_Party/Assign_Party_Edit.aspx?ID={id}");
         }
     }
 } 

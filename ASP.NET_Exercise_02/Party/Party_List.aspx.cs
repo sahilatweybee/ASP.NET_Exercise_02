@@ -5,8 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
+using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -22,27 +21,16 @@ namespace ASP.NET_Exercise_02
 
         protected void display_Data()
         {
-            SqlConnection con = null;
             try
             {
-                con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                con.Open();
-                SqlCommand cm = new SqlCommand("PR_Select_Party", con);
-                cm.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter sde = new SqlDataAdapter(cm);
-                DataSet ds = new DataSet();
-                sde.Fill(ds);
+                string Query = "PR_Select_Party";
+                DataTable ds = Base_Connection_Class.Select_Query(Query);
                 PartyGrid.DataSource = ds;
                 PartyGrid.DataBind();
-
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                con.Close();
+                lblError.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message ;
             }
         }
 
@@ -55,26 +43,19 @@ namespace ASP.NET_Exercise_02
             int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
             int id = Convert.ToInt32(PartyGrid.Rows[rowindex].Cells[0].Text);
             string confirmDelete = Request.Form["confirm_delete"];
-            SqlConnection con = null;
             if (confirmDelete == "Yes")
             {
-                try
+                string query = "PR_Delete_Party";
+                string param_name = "@Party_id";
+                string error = Base_Connection_Class.Delete_Query(query, param_name, id);
+                display_Data();
+                if(error == "")
                 {
-                    con = new SqlConnection(ConfigurationManager.ConnectionStrings["PartyDB"].ConnectionString);
-                    SqlCommand cm = new SqlCommand("PR_Delete_Party", con);
-                    cm.CommandType = CommandType.StoredProcedure;
-                    cm.Parameters.AddWithValue("@Party_id", id);
-                    con.Open();
-                    cm.ExecuteNonQuery();
-                    display_Data();
+                    lblError.Text = error;
                 }
-                catch (Exception ex)
+                else
                 {
-                    lblError.Text = ex.Message;
-                }
-                finally
-                {
-                    con.Close();
+                    lblError.Text = "Unable to delete this Party has a Product assigned to it. Refer assign party page";
                 }
             }
             else
@@ -87,7 +68,8 @@ namespace ASP.NET_Exercise_02
         {
             int rowindex = ((GridViewRow)(sender as Control).NamingContainer).RowIndex;
             int id = Convert.ToInt32(PartyGrid.Rows[rowindex].Cells[0].Text);
-            Response.Redirect("~/Party/party_Edit.aspx?ID=" + id);
+            string name = PartyGrid.Rows[rowindex].Cells[1].Text;
+            Response.Redirect($"~/Party/party_Edit.aspx?ID={id}&name={name}");
         }
     }
 }

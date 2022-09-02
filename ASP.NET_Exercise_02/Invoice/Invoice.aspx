@@ -27,19 +27,19 @@
         </tr>
     </table>
     <br />
-    <asp:Button ID="addInvoice" runat="server" Text="Add to Invoice" OnClick="addInvoice_Click" CssClass="addBtn btn" Height="1.5em" Font-Size="1.2em" BorderStyle="Solid" style="float:none"/>
+    <asp:Button ID="addInvoice" runat="server" CssClass="addBtn" Text="Add to Invoice" OnClick="addInvoice_Click" Height="1.5em" Font-Size="1.2em" BorderStyle="Solid"/>
     <br />
-    <asp:GridView ID="Invoice_View" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%">
-        <HeaderStyle BackColor="#666666" ForeColor="White" Font-Bold="true" HorizontalAlign="Center" VerticalAlign="Middle"  />
-        <AlternatingRowStyle BackColor="#cccccc" BorderColor="#cccccc"/>
-        <RowStyle BackColor="White" BorderColor="White" BorderStyle="None" HorizontalAlign="Left" />
+    <asp:GridView ID="Invoice_View" runat="server" CssClass="table table-primary table-striped" AutoGenerateColumns="False" Width="100%">
+        <HeaderStyle BackColor="DarkSlateBlue" BorderColor="DarkSlateBlue" ForeColor="White" Font-Bold="true" VerticalAlign="Middle"  />
+        <AlternatingRowStyle BackColor="LightBlue" BorderColor="LightBlue"/>
+        <RowStyle BackColor="LightCyan" BorderColor="LightCyan" BorderStyle="None" HorizontalAlign="Left" VerticalAlign="Middle" Height="1.5em"/>
         <Columns>
-            <asp:BoundField DataField="invoice_id" HeaderText="#" />
-            <asp:BoundField DataField="party_name" HeaderText="Party" />
-            <asp:BoundField DataField="product_name" HeaderText="Product" />
-            <asp:BoundField DataField="rate" HeaderText="Rate Of Product" />
-            <asp:BoundField DataField="quantity" HeaderText="Quantity" />
-            <asp:BoundField DataField="total" HeaderText="Total" />
+            <asp:BoundField DataField="invoice_id" HeaderText="#" ItemStyle-HorizontalAlign="Center"/>
+            <asp:BoundField DataField="party_name" HeaderText="Party" HeaderStyle-HorizontalAlign="Left"/>
+            <asp:BoundField DataField="product_name" HeaderText="Product" HeaderStyle-HorizontalAlign="Left"/>
+            <asp:BoundField DataField="rate" HeaderText="Rate Of Product" HeaderStyle-HorizontalAlign="Left"/>
+            <asp:BoundField DataField="quantity" HeaderText="Quantity" HeaderStyle-HorizontalAlign="Left"/>
+            <asp:BoundField DataField="total" HeaderText="Total" HeaderStyle-HorizontalAlign="Left"/>
         </Columns>
     </asp:GridView>
     <br />
