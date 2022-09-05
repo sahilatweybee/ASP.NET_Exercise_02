@@ -31,7 +31,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
+                lblMessage.Text = ex.Message;
             }
         }
 
@@ -55,7 +55,7 @@ namespace ASP.NET_Exercise_02
                 }
                 catch (Exception ex)
                 {
-                    lblError.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message;
+                    lblMessage.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message;
                 }
             }
         }

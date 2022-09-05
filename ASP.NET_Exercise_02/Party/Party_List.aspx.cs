@@ -30,7 +30,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception ex)
             {
-                lblError.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message ;
+                lblMessage.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message ;
             }
         }
 
@@ -51,11 +51,11 @@ namespace ASP.NET_Exercise_02
                 display_Data();
                 if(error == "")
                 {
-                    lblError.Text = error;
+                    lblMessage.Text = error;
                 }
                 else
                 {
-                    lblError.Text = "Unable to delete this Party has a Product assigned to it. Refer assign party page";
+                    lblMessage.Text = "Unable to delete this Party has a Product assigned to it. Refer assign party page";
                 }
             }
             else

@@ -43,11 +43,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if(error == "")
                 {
-                    lblError.Text = "Product Updated SuccessFully";
+                    lblMessage.Text = "Product Updated SuccessFully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to update Product!!!";
+                    lblMessage.Text = "Unable to update Product!!!";
                 }
             }
             else
@@ -58,11 +58,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
-                    lblError.Text = "Product Added SuccessFully";
+                    lblMessage.Text = "Product Added SuccessFully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to Add Product!!!";
+                    lblMessage.Text = "Unable to Add Product!!!";
                 }
             }
             

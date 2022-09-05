@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Product Edit</h1>
-    <asp:Label ID="lblError" runat="server" Font-Size="Small" Text=""></asp:Label>
+    <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
     <br />
     <asp:Label runat="server" Text="Product Name:" />
     &nbsp;&nbsp;

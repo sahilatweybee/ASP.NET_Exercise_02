@@ -56,7 +56,7 @@ namespace ASP.NET_Exercise_02
             }
             else
             {
-                lblError.Text = "There is some error in fetching record you selected!!" + str["error"];
+                lblMessage.Text = "There is some error in fetching record you selected!!" + str["error"];
             }
             
         }
@@ -76,11 +76,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
-                    lblError.Text = "Updated SuccessFully";
+                    lblMessage.Text = "Updated SuccessFully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to update this Record!!!";
+                    lblMessage.Text = "Unable to update this Record!!!";
                 }
             }
             else
@@ -92,11 +92,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
-                    lblError.Text = "Product Added SuccessFully";
+                    lblMessage.Text = "Product Added SuccessFully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to Add Product!!!";
+                    lblMessage.Text = "Unable to Add Product!!!";
                 }
             }      
         }

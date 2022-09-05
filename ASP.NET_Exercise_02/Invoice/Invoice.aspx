@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Invoice" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Invoice.aspx.cs" Inherits="ASP.NET_Exercise_02.Invoice" Theme="Default_Theme"  %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <h1>Invoice</h1>
-        <asp:Label ID="LblError" ForeColor="DarkRed" runat="server" Font-Size="Small" Text=""></asp:Label>
+        <asp:Label ID="lblMessage" ForeColor="DarkRed" runat="server" Font-Size="Small" Text=""></asp:Label>
     <br />
     <table style="width: 30%; margin: auto; text-align: right;">
         <tr>

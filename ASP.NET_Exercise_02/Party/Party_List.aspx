@@ -5,7 +5,7 @@
 
 <asp:Content ID="PartyContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Party List</h1>
-    <asp:Label ID="lblError" runat="server" Font-Size="Small" Text=""></asp:Label>
+    <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
     <asp:ImageButton ImageUrl="~/Images/add_box_FILL0_wght500_GRAD200_opsz48.png" style="float:right" ImageAlign="AbsMiddle" runat="server"  CssClass="btn" ID="Add_Party" runat="server" Text="Add New Party"  OnClick="Add_Party_Click" />
         <asp:GridView ID="PartyGrid" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%">
         <HeaderStyle BackColor="DarkSlateBlue" BorderColor="DarkSlateBlue" ForeColor="White" Font-Bold="true" VerticalAlign="Middle"/>

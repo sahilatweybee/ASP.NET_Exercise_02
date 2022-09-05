@@ -75,7 +75,7 @@ namespace ASP.NET_Exercise_02
             }
             else
             {
-                LblError.Text = error;
+                lblMessage.Text = error;
             }
         }
 

@@ -42,11 +42,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if(error == "")
                 {
-                    lblError.Text = "Party Updated SuccessFully";
+                    lblMessage.Text = "Party Updated SuccessFully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to Update this Party!!! There is already a party with the same name.";
+                    lblMessage.Text = "Unable to Update this Party!!! There is already a party with the same name.";
                 }
             }
             else
@@ -57,11 +57,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
-                    lblError.Text = "Party Added Successfully";
+                    lblMessage.Text = "Party Added Successfully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to add Party!!! There is already a Party with the same name.";
+                    lblMessage.Text = "Unable to add Party!!! There is already a Party with the same name.";
                 }
             }   
         }

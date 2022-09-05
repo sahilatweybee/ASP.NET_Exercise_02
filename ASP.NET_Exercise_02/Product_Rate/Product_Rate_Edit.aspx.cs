@@ -49,7 +49,7 @@ namespace ASP.NET_Exercise_02
             else
             {
                 string s = "There is some error in fetching record you selected!!";
-                lblError.Text =s + str["error"];
+                lblMessage.Text =s + str["error"];
             }
         }
 
@@ -69,11 +69,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if(error == "")
                 {
-                    lblError.Text = "Record Updated SuccessFully";
+                    lblMessage.Text = "Record Updated SuccessFully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to Update Record!!!";
+                    lblMessage.Text = "Unable to Update Record!!!";
                 }
             }
             else
@@ -86,11 +86,11 @@ namespace ASP.NET_Exercise_02
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
-                    lblError.Text = "Record Added SuccessFully";
+                    lblMessage.Text = "Record Added SuccessFully";
                 }
                 else
                 {
-                    lblError.Text = "Unable to Add Record!!!";
+                    lblMessage.Text = "Unable to Add Record!!!";
                 }
             }
         }

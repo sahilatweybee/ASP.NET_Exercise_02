@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Assign Party Edit</h1>
-    <asp:Label ID="lblError" runat="server" Font-Size="Small" Text=""></asp:Label>
+    <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
     <br />
     
     <table style="width: 30%; margin: auto; text-align: right;">
