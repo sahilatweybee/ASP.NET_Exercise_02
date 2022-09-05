@@ -115,7 +115,7 @@ namespace ASP.NET_Exercise_02
         protected void Show_calander_Click(object sender, ImageClickEventArgs e)
         {
             Calendar.Visible = !Calendar.Visible;
-            Calendar.SelectedDate = DateTime.Today;
+            Calendar.SelectedDate = Convert.ToDateTime(DateOfRate.Text);
         }
 
         protected void Calendar_SelectionChanged(object sender, EventArgs e)
