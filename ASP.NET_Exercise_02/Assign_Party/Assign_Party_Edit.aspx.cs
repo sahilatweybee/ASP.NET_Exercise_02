@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using ASP.NET_Exercise_02.App_Code;
 
@@ -80,7 +77,7 @@ namespace ASP.NET_Exercise_02
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to update this Record!!!";
+                    lblMessage.Text = "Unable to update this Record!!!\n" + error;
                 }
             }
             else
@@ -96,7 +93,7 @@ namespace ASP.NET_Exercise_02
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to Add Product!!!";
+                    lblMessage.Text = "Unable to Add Product!!!\n" + error;
                 }
             }      
         }

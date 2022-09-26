@@ -4,7 +4,7 @@
 </asp:Content> 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Product Edit</h1>
+    <h1><%=Request.QueryString["ID"]!=null ? "Product Edit" : "Product Add" %></h1>
     <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
     <br />
     <asp:Label runat="server" Text="Product Name:" />

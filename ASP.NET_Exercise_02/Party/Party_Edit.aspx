@@ -3,8 +3,8 @@
     <script src="../scripts/Script.js"></script>
 </asp:Content> 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Party Edit</h1>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
+    <h1><%=Request.QueryString["ID"]!=null ? "Party Edit" : "Party Add" %></h1>
     <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
     <br />
     <asp:Label runat="server" Text="Party Name:" />

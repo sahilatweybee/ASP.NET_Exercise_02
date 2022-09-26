@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
@@ -70,6 +68,9 @@ namespace ASP.NET_Exercise_02
                 if(error == "")
                 {
                     lblMessage.Text = "Record Updated SuccessFully";
+                    SelectProduct.SelectedValue = "0";
+                    Curr_rate.Text = "";
+                    DateOfRate.Text = DateTime.Today.ToShortDateString();
                 }
                 else
                 {
@@ -87,10 +88,13 @@ namespace ASP.NET_Exercise_02
                 if (error == "")
                 {
                     lblMessage.Text = "Record Added SuccessFully";
+                    SelectProduct.SelectedValue = "0";
+                    Curr_rate.Text = "";
+                    DateOfRate.Text = DateTime.Today.ToShortDateString();
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to Add Record!!!";
+                    lblMessage.Text = "Unable to Add Record!!!\n" + error;
                 }
             }
         }
