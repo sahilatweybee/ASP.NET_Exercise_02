@@ -42,15 +42,15 @@ h1 {
 
 .addBtn {
     color: white;
-    background-color: lime;
-    border-color: lime;
+    background-color: #7986CB;
+    border-color: #7986CB;
     border-radius: 0.3em;
     margin-bottom: 5px;
 }
     .addBtn:hover {
-        background-color: limegreen;
-        border-color: limegreen;
-        cursor:pointer;
+        background-color: #5C6BC0;
+        border-color: #5C6BC0;
+        cursor: pointer;
     }
 
 .table {

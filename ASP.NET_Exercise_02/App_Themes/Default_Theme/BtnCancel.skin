@@ -15,11 +15,12 @@ Default skin template. The following skins are provided as examples only.
 --%>
 
 <asp:Button 
-        runat="server" 
-        BorderStyle="Solid"         
+        runat="server"         
         Font-Size="1.2em" 
         Height="1.5em"
         SkinID="BtnCancel" 
         BackColor="White" 
         CssClass="btn"
-        BorderColor="White"/>
+        BorderStyle="Solid" 
+        BorderColor="Black" 
+        BorderWidth="0.1em"/>

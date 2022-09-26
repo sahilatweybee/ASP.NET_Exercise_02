@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
     <h1><%=Request.QueryString["ID"]!=null ? "Party Edit" : "Party Add" %></h1>
-    <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
+    <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text="" ></asp:Label>
     <br />
     <asp:Label runat="server" Text="Party Name:" />
     &nbsp;&nbsp;
@@ -13,6 +13,7 @@
     <br />
     <br />
     <asp:Button ID="Update" runat="server" Text="Add" SkinID="BtnUpdate" OnClick="UpdateParty_Click"/>
+    <%--  --%>
     &nbsp;&nbsp;
     <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClientClick="ConfirmExit()" OnClick="CancelBtn_Click"/>
 </asp:Content>
