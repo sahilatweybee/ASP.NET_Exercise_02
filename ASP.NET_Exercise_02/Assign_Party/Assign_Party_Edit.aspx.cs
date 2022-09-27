@@ -82,7 +82,7 @@ namespace ASP.NET_Exercise_02
             }
             else
             {
-                query = "PR_Assign_Party";
+                query = "PR_Add_Assign_Party";
                 parameters = new Dictionary<string, string>();
                 parameters.Add("party_id", SelectParty.SelectedValue);
                 parameters.Add("product_id", SelectProduct.SelectedValue);

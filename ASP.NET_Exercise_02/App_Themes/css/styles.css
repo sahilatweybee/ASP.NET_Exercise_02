@@ -31,9 +31,10 @@ a {
     color: gray;
     margin: auto 20px;
 }
-    .nav--link:hover{
-        color:white;
-        cursor:pointer;
+
+    .nav--link:hover {
+        color: white;
+        cursor: pointer;
     }
 
 h1 {
@@ -42,20 +43,21 @@ h1 {
 
 .addBtn {
     color: white;
-    background-color: #7986CB;
-    border-color: #7986CB;
+    background-color: #9FA8DA;
+    border-color: #9FA8DA;
     border-radius: 0.3em;
     margin-bottom: 5px;
 }
+
     .addBtn:hover {
-        background-color: #5C6BC0;
-        border-color: #5C6BC0;
+        background-color: #7986CB;
+        border-color: #7986CB;
         cursor: pointer;
     }
 
 .table {
     width: 100%;
-    
+    border: none;
 }
 
 .btn-red {
@@ -63,8 +65,8 @@ h1 {
     background-color: red;
     border-color: red;
     color: white;
-
 }
+
     .btn-red:hover {
         background-color: darkred;
         border-color: darkred;
@@ -76,14 +78,27 @@ h1 {
     color: #337ab7;
     border-radius: 0.3em;
 }
+
     .btn-edit:hover {
         color: black;
         cursor: pointer;
     }
 
-.btn{
+.btn {
     border-radius: 0.3em;
 }
-    .btn:hover{
-        cursor:pointer;
+
+    .btn:hover {
+        cursor: pointer;
     }
+
+.table-edit {
+    width: 30%;
+    text-align: left;
+    margin: auto;
+}
+
+.action-column {
+    display: flex;
+    justify-content: space-evenly;
+}

@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="Invoice" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Invoice.aspx.cs" Inherits="ASP.NET_Exercise_02.Invoice" Theme="Default_Theme"  %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <h1>Invoice</h1>
-        <asp:Label ID="lblMessage" ForeColor="DarkRed" runat="server" Font-Size="Small" Text=""></asp:Label>
+        <asp:Label ID="lblMessage" ForeColor="DarkRed" runat="server" Font-Size="Medium" Text=""></asp:Label>
     <br />
-    <table style="width: 30%; margin: auto; text-align: right;">
+    <table class="table-edit">
         <tr>
             <td><asp:Label runat="server" Text="Party Name:" /></td>
             <td>
@@ -31,8 +31,8 @@
     <br />
     <asp:GridView ID="Invoice_View" runat="server" CssClass="table table-primary table-striped" AutoGenerateColumns="False" Width="100%">
         <HeaderStyle BackColor="DarkSlateBlue" BorderColor="DarkSlateBlue" ForeColor="White" Font-Bold="true" VerticalAlign="Middle"  />
-        <AlternatingRowStyle BackColor="LightBlue" BorderColor="LightBlue"/>
-        <RowStyle BackColor="LightCyan" BorderColor="LightCyan" BorderStyle="None" HorizontalAlign="Left" VerticalAlign="Middle" Height="1.5em"/>
+        <AlternatingRowStyle BackColor="#C5CAE9" BorderColor="#C5CAE9"/>
+        <RowStyle BackColor="#E8EAF6" BorderColor="#E8EAF6" BorderStyle="None" HorizontalAlign="Left" VerticalAlign="Middle" Height="1.5em"/>
         <Columns>
             <asp:BoundField DataField="invoice_id" HeaderText="#" ItemStyle-HorizontalAlign="Center"/>
             <asp:BoundField DataField="party_name" HeaderText="Party" HeaderStyle-HorizontalAlign="Left"/>

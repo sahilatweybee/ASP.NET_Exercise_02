@@ -5,11 +5,11 @@
 </asp:Content> 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1><%=Request.QueryString["ID"]!=null ? "Assign Party Edit" : "Assign Party Add" %></h1>
-    <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
+    <h1><%=Request.QueryString["ID"] != null ? "Assign Party Edit" : "Assign Party Add" %></h1>
+    <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
     <br />
     
-    <table style="width: 30%; margin: auto; text-align: right;">
+    <table class="table-edit">
         <tr>
             <td><asp:Label runat="server" Text="Party Name:" /></td>
             <td>
@@ -24,9 +24,15 @@
                 </asp:DropDownList>
             </td>
         </tr>
+        <tr>
+            <td style="text-align: center">
+                <br />
+                <asp:Button ID="Update" runat="server" Text="Add" SkinID="BtnUpdate" OnClick="UpdateAssignParty_Click" style="width: 57px"/>
+            </td>
+            <td>
+                <br />
+                <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClientClick="ConfirmExit()" OnClick="CancelBtn_Click"/>
+            </td>
+        </tr>
     </table>
-    <br />
-    <asp:Button ID="Update" runat="server" Text="Add" SkinID="BtnUpdate" OnClick="UpdateAssignParty_Click" style="width: 57px"/>
-    &nbsp;&nbsp;
-    <asp:Button ID="CancelBtn" runat="server" Text="Cancel" SkinID="BtnCancel" OnClientClick="ConfirmExit()" OnClick="CancelBtn_Click"/>
 </asp:Content>

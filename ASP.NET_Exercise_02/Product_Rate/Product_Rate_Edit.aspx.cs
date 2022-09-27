@@ -63,7 +63,7 @@ namespace ASP.NET_Exercise_02
                 parameters.Add("Rate_id", Request.QueryString["ID"]);
                 parameters.Add("Product_id", SelectProduct.SelectedValue);
                 parameters.Add("Rate", Curr_rate.Text);
-                parameters.Add("DateOfRate", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
+                parameters.Add("Date", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if(error == "")
                 {
@@ -83,7 +83,7 @@ namespace ASP.NET_Exercise_02
                 query = "PR_Add_Rate";
                 parameters.Add("Product_id", SelectProduct.SelectedValue);
                 parameters.Add("Rate", Curr_rate.Text);
-                parameters.Add("DateOfRate", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
+                parameters.Add("Date", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {

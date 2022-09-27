@@ -8,15 +8,15 @@
     <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
     <asp:ImageButton ImageUrl="~/Images/add_box_FILL0_wght500_GRAD200_opsz48.png" style="float:right" ImageAlign="AbsMiddle" runat="server" ID="Add_Party" runat="server" Text="Add New Party" CssClass="btn" OnClick="Add_Party_Click" />
     <asp:GridView ID="AssignPartyGrid" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%" >
-        <HeaderStyle BackColor="DarkSlateBlue" BorderColor="DarkSlateBlue" ForeColor="White" Font-Bold="true" VerticalAlign="Middle"/>
-        <AlternatingRowStyle BackColor="LightBlue" BorderColor="LightBlue"/>
-        <RowStyle BackColor="LightCyan" BorderColor="LightCyan" BorderStyle="None" HorizontalAlign="Left" VerticalAlign="Middle" Height="1.5em"/>
+        <HeaderStyle BackColor="#3F51B5" BorderColor="#3F51B5" ForeColor="White" Font-Bold="true" VerticalAlign="Middle"/>
+        <AlternatingRowStyle BackColor="#D6DBFA" BorderColor="#D6DBFA" BorderStyle="None"/>
+        <RowStyle BackColor="#E8EAF6" BorderColor="#E8EAF6" BorderStyle="None" HorizontalAlign="Left" VerticalAlign="Middle" Height="1.5em"/>
         <Columns>
             <asp:BoundField DataField="assign_id" HeaderText="#" ItemStyle-HorizontalAlign="Center"/>
             <asp:BoundField DataField="party_name" HeaderText="Party Name" HeaderStyle-HorizontalAlign="Left"/>
             <asp:BoundField DataField="product_name" HeaderText="Product Name" HeaderStyle-HorizontalAlign="Left" />
             <asp:TemplateField HeaderText="Actions" ShowHeader="False">
-                <ItemStyle HorizontalAlign="Center"/>
+                <ItemStyle HorizontalAlign="Center" CssClass="action-column"/>
                 <ControlStyle Height="2em"/>
                 <ItemTemplate>
                     <asp:ImageButton ID="btnEdit" style="vertical-align:text-bottom;" ImageUrl="~/Images/edit_square_FILL0_wght500_GRAD200_opsz40.png" runat="server" CausesValidation="false" CommandArgument='<%# Eval("assign_id") %>' CommandName="Edit" OnClick="BtnEdit_Click" />
