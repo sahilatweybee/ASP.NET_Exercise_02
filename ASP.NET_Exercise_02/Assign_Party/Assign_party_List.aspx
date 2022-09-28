@@ -5,7 +5,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Assign Party List</h1>
-    <asp:Label ID="lblMessage" runat="server" Font-Size="Small" Text=""></asp:Label>
+    <div class="lbl-Msg">
+        <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+    </div>
+
     <asp:ImageButton ImageUrl="~/Images/add_box_FILL0_wght500_GRAD200_opsz48.png" style="float:right" ImageAlign="AbsMiddle" runat="server" ID="Add_Party" runat="server" Text="Add New Party" CssClass="btn" OnClick="Add_Party_Click" />
     <asp:GridView ID="AssignPartyGrid" runat="server" CssClass="table" AutoGenerateColumns="False" Width="100%" >
         <HeaderStyle BackColor="#3F51B5" BorderColor="#3F51B5" ForeColor="White" Font-Bold="true" VerticalAlign="Middle"/>
