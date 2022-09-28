@@ -6,9 +6,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1><%=Request.QueryString["ID"] != null ? "Assign Party Edit" : "Assign Party Add" %></h1>
-    <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
-    <br />
     
+    <div class="lbl-Msg">
+        <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+    </div>
+
+    <br />
     <table class="table-edit">
         <tr>
             <td><asp:Label runat="server" Text="Party Name:" /></td>

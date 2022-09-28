@@ -68,32 +68,48 @@ namespace ASP.NET_Exercise_02
                 query = "PR_Update_Assign_Party";
                 parameters = new Dictionary<string, string>();
                 parameters.Add("assign_id", Request.QueryString["ID"]);
-                parameters.Add("party_id", SelectParty.SelectedValue);
-                parameters.Add("product_id", SelectProduct.SelectedValue);
+                parameters.Add("party_id", SelectParty.SelectedValue == "0" ? null : SelectParty.SelectedValue);
+                parameters.Add("product_id", SelectProduct.SelectedValue == "0" ? null : SelectProduct.SelectedValue);
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
-                    lblMessage.Text = "Updated SuccessFully";
+                    lblMessage.Text = "Assigned Party Updated SuccessFully";
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to update this Record!!!\n" + error;
+                    if (error.Contains("was not supplied."))
+                    {
+                        lblMessage.Text = "Please fill all the fields!!";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Unable to update this Record!!!\n" + error;
+                    }
+                    
                 }
             }
             else
             {
                 query = "PR_Add_Assign_Party";
                 parameters = new Dictionary<string, string>();
-                parameters.Add("party_id", SelectParty.SelectedValue);
-                parameters.Add("product_id", SelectProduct.SelectedValue);
+                parameters.Add("party_id", SelectParty.SelectedValue == "0" ? null : SelectParty.SelectedValue);
+                parameters.Add("product_id", SelectProduct.SelectedValue == "0" ? null : SelectProduct.SelectedValue);
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
-                    lblMessage.Text = "Product Added SuccessFully";
+                    lblMessage.Text = "Party Assigned SuccessFully";
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to Add Product!!!\n" + error;
+                    if (error.Contains("was not supplied."))
+                    {
+                        lblMessage.Text = "Please fill all the fields!!";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Unable to Add Product!!!\n" + error;
+                    }
+                    
                 }
             }      
         }
