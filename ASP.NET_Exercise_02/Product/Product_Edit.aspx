@@ -6,7 +6,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1><%=Request.QueryString["ID"]!=null ? "Product Edit" : "Product Add" %></h1>
-    <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+    
+    <div class="lbl-Msg">
+        <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+    </div>
+    
     <br />
     <table class="table-edit">
         <tr style="text-align: left;">
@@ -18,7 +22,7 @@
             </td>
         </tr>
         <tr style="text-align: left;">
-            <td style="text-align:center;">
+            <td style="text-align: center;">
                 <br />
                 <asp:Button ID="Update" runat="server" Text="Add" SkinID="BtnUpdate" OnClick="UpdateProduct_Click" />
             </td>

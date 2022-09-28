@@ -6,7 +6,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1><%=Request.QueryString["ID"]!=null ? "Product Rate Edit" : "Product Rate Add" %></h1>
-    <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+    
+    <div class="lbl-Msg">
+        <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+    </div>
+    
     <br />
     <table class="table-edit">
         <tr>

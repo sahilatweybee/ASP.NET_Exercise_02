@@ -39,7 +39,7 @@ namespace ASP.NET_Exercise_02
                 query = "PR_Update_Party";
                 parameters = new Dictionary<string, string>();
                 parameters.Add("party_id", Request.QueryString["ID"].ToString());
-                parameters.Add("party_name", Party_name.Text.ToString());
+                parameters.Add("party_name", Party_name.Text.ToString() == "" ? null : Party_name.Text.ToString());
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 lblMessage.Visible = true;
                 if (error == "")
@@ -48,15 +48,21 @@ namespace ASP.NET_Exercise_02
                 }
                 else
                 {
-
-                    lblMessage.Text = "Unable to Update this Party!!! There is already a party with the same name.";
+                    if (error.Contains("was not supplied."))
+                    {
+                        lblMessage.Text = "Please fill all the fields!!";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Unable to Update this Party!!! There is already a party with the same name.";
+                    } 
                 }
             }
             else
             {
                 query = "PR_Add_Party";
                 parameters = new Dictionary<string, string>();
-                parameters.Add("@Party_name", Party_name.Text.ToString());
+                parameters.Add("@Party_name", Party_name.Text.ToString() == "" ? null : Party_name.Text.ToString());
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
                 {
@@ -64,7 +70,14 @@ namespace ASP.NET_Exercise_02
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to add Party!!! There is already a Party with the same name.";
+                    if (error.Contains("was not supplied."))
+                    {
+                        lblMessage.Text = "Please fill all the fields!!";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Unable to add Party!!! Another Party exist with same name in database.";
+                    }
                 }
             }
         }

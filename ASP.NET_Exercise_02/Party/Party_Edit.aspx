@@ -6,7 +6,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1><%=Request.QueryString["ID"]!=null ? "Party Edit" : "Party Add" %></h1>
-    <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+   
+    <div class="lbl-Msg">
+        <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
+    </div>
     <br />
     <table class="table-edit">
         <tr>
@@ -14,7 +17,7 @@
                 <asp:Label runat="server" Text="Party Name:" />
             </td>
             <td>
-                <asp:TextBox ID="Party_name" runat="server"></asp:TextBox>
+                <asp:TextBox ID="Party_name" runat="server" TextMode="SingleLine"></asp:TextBox>
             </td>
         </tr>
         <tr>

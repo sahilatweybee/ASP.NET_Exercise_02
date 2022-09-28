@@ -54,28 +54,36 @@ namespace ASP.NET_Exercise_02
 
         protected void addInvoice_Click(object sender, EventArgs e)
         {
-            int rate = Convert.ToInt32(Curr_rate.Text);
-            int quantity = Convert.ToInt32(quantity_txtbox.Text);
+            int rate = Curr_rate.Text == "" ? 0 : Convert.ToInt32(Curr_rate.Text);
+            int quantity = quantity_txtbox.Text == "" ? 0 : Convert.ToInt32(quantity_txtbox.Text);
+            string query = "PR_Add_invoice";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("@Party_id", SelectParty.SelectedValue == "0" ? null : SelectParty.SelectedValue);
+            parameters.Add("@Product_id", SelectProduct.SelectedValue == "0" ? null : SelectProduct.SelectedValue);
+            parameters.Add("@Rate", Curr_rate.Text == "" ? null : Curr_rate.Text);
+            parameters.Add("@Quantity", quantity_txtbox.Text == "" ? null : quantity_txtbox.Text);
+            parameters.Add("@Total", (rate * quantity).ToString());
+            string error = Base_Connection_Class.Insert_Update_Query(query, parameters);
 
-                string query = "PR_Add_invoice";
-                Dictionary<string, string> parameters = new Dictionary<string, string>(); 
-                parameters.Add("@Party_id", SelectParty.SelectedValue);
-                parameters.Add("@Product_id", SelectProduct.SelectedValue);
-                parameters.Add("@Rate", rate.ToString());
-                parameters.Add("@Quantity", quantity.ToString());
-                parameters.Add("@Total", (rate * quantity).ToString());
-                string error = Base_Connection_Class.Insert_Update_Query(query, parameters);
-                
-            if(error == "")
+            if (error == "")
             {
                 Display_Invoice();
                 SelectProduct.SelectedValue = "0";
                 Curr_rate.Text = "";
                 quantity_txtbox.Text = "";
+                lblMessage.Text = "";
             }
             else
             {
-                lblMessage.Text = error;
+                if (error.Contains("was not supplied."))
+                {
+                    lblMessage.Text = "Please fill all the fields!!";
+                }
+                else
+                {
+                    lblMessage.Text = error;
+                }
+                
             }
         }
 

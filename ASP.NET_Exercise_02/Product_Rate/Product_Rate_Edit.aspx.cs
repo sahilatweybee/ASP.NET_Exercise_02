@@ -61,7 +61,7 @@ namespace ASP.NET_Exercise_02
                 parameters = new Dictionary<string, string>();
                 query = "PR_Update_Rate";
                 parameters.Add("Rate_id", Request.QueryString["ID"]);
-                parameters.Add("Product_id", SelectProduct.SelectedValue);
+                parameters.Add("Product_id", SelectProduct.SelectedValue == "0" ? null : SelectProduct.SelectedValue);
                 parameters.Add("Rate", Curr_rate.Text);
                 parameters.Add("Date", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
@@ -74,15 +74,23 @@ namespace ASP.NET_Exercise_02
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to Update Record!!!";
+                    if (error.Contains("was not supplied."))
+                    {
+                        lblMessage.Text = "Please fill all the fields!!";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Unable to Update Record!!!";
+                    }
+                    
                 }
             }
             else
             {
                 parameters = new Dictionary<string, string>();
                 query = "PR_Add_Rate";
-                parameters.Add("Product_id", SelectProduct.SelectedValue);
-                parameters.Add("Rate", Curr_rate.Text);
+                parameters.Add("Product_id", SelectProduct.SelectedValue == "0" ? null : SelectProduct.SelectedValue);
+                parameters.Add("Rate", Curr_rate.Text.ToString() == "" ? null : Curr_rate.Text);
                 parameters.Add("Date", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
@@ -94,7 +102,15 @@ namespace ASP.NET_Exercise_02
                 }
                 else
                 {
-                    lblMessage.Text = "Unable to Add Record!!!\n" + error;
+                    if (error.Contains("was not supplied."))
+                    {
+                        lblMessage.Text = "Please fill all the fields!!";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "Unable to Add Record!!!\n" + error;
+                    }
+                    
                 }
             }
         }
