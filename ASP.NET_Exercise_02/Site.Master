@@ -6,8 +6,7 @@
 <head runat="server">
     <title></title>
     <link href="App_Themes/css/styles.css" rel="stylesheet" />
-    <asp:ContentPlaceHolder ID="Head" runat="server">
-    </asp:ContentPlaceHolder>
+    <script src="<%= Page.ResolveUrl("~/scripts/Script.js") %>"></script>
 </head>
 <body>
     <form id="form1" runat="server">
