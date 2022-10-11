@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="Product Rate List" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Product_Rate_List.aspx.cs" Inherits="ASP.NET_Exercise_02.Produce_Rate" Theme="Default_Theme" MaintainScrollPositionOnPostback="true" %>
-<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server" Visible="false">
-    <script src="../scripts/Script.js"></script>
-</asp:Content> 
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Product Rate List</h1>
