@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Product Edit" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Product_List.aspx.cs" Inherits="ASP.NET_Exercise_02.Product_List" Theme="Default_Theme" MaintainScrollPositionOnPostback="true" %>
+﻿<%@ Page Title="Product List" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Product_List.aspx.cs" Inherits="ASP.NET_Exercise_02.Product_List" Theme="Default_Theme" MaintainScrollPositionOnPostback="true" %>
 
 
 <asp:Content ID="ProductContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

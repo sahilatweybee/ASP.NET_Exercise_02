@@ -1,13 +1,12 @@
 ﻿<%@ Page Title="Product Edit" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Product_Edit.aspx.cs" Inherits="ASP.NET_Exercise_02.Product_Edit" Theme="Default_Theme" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1><%=Request.QueryString["ID"]!=null ? "Product Edit" : "Product Add" %></h1>
-    
+
     <div class="lbl-Msg">
         <asp:Label ID="lblMessage" runat="server" Font-Size="Medium" Text=""></asp:Label>
     </div>
-    
+
     <br />
     <table class="table-edit">
         <tr style="text-align: left;">

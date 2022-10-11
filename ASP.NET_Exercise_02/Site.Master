@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <title><%=Page.Title %></title>
     <link href="App_Themes/css/styles.css" rel="stylesheet" />
     <script src="<%= Page.ResolveUrl("~/scripts/Script.js") %>"></script>
 </head>

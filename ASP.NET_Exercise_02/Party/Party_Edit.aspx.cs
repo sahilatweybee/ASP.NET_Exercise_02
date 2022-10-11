@@ -1,10 +1,6 @@
-﻿using System;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -55,7 +51,7 @@ namespace ASP.NET_Exercise_02
                     else
                     {
                         lblMessage.Text = "Unable to Update this Party!!! There is already a party with the same name.";
-                    } 
+                    }
                 }
             }
             else

@@ -1,8 +1,4 @@
 ﻿<%@ Page Title="Assign Party Edit" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Assign_Party_Edit.aspx.cs" Inherits="ASP.NET_Exercise_02.Assign_Party_Edit" Theme="Default_Theme" %>
-<asp:Content ID="HeadContent" ContentPlaceHolderID="Head" runat="server" Visible="false">
-    <script src="../scripts/Script.js"></script>
-    <script src="../scripts/Script.js"></script>
-</asp:Content> 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1><%=Request.QueryString["ID"] != null ? "Assign Party Edit" : "Assign Party Add" %></h1>

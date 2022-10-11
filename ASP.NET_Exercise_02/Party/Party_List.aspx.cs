@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -30,7 +27,7 @@ namespace ASP.NET_Exercise_02
             }
             catch (Exception ex)
             {
-                lblMessage.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message ;
+                lblMessage.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message;
             }
         }
 
@@ -49,7 +46,7 @@ namespace ASP.NET_Exercise_02
                 string param_name = "@Party_id";
                 string error = Base_Connection_Class.Delete_Query(query, param_name, id);
                 display_Data();
-                if(error == "")
+                if (error == "")
                 {
                     lblMessage.Text = error;
                 }

@@ -1,13 +1,9 @@
-﻿using System;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using ASP.NET_Exercise_02.App_Code;
+using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace ASP.NET_Exercise_02
 {
@@ -83,7 +79,7 @@ namespace ASP.NET_Exercise_02
                 {
                     lblMessage.Text = error;
                 }
-                
+
             }
         }
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -21,20 +18,20 @@ namespace ASP.NET_Exercise_02
 
         private void display_Data()
         {
-            
+
             try
             {
                 string query = "PR_Select_Product";
                 DataTable ds = Base_Connection_Class.Select_Query(query);
                 ProductGrid.DataSource = ds;
                 ProductGrid.DataBind();
-                
+
             }
             catch (Exception ex)
             {
                 lblMessage.Text = "There Was Some Problem In Fetching Data from the server.\n" + ex.Message; ;
             }
-            
+
         }
 
         protected void Add_Party_Click(object sender, EventArgs e)

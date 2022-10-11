@@ -1,14 +1,6 @@
-﻿using System;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using ASP.NET_Exercise_02.App_Code;
-using System.Drawing;
 
 namespace ASP.NET_Exercise_02
 {
@@ -42,7 +34,7 @@ namespace ASP.NET_Exercise_02
                 parameters.Add("@product_id", Request.QueryString["ID"]);
                 parameters.Add("@product_name", Product_name.Text.ToString() == "" ? null : Product_name.Text.ToString());
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
-                if(error == "")
+                if (error == "")
                 {
                     lblMessage.Text = "Product Updated SuccessFully";
                 }
@@ -56,13 +48,13 @@ namespace ASP.NET_Exercise_02
                     {
                         lblMessage.Text = "Unable to update Product!!! Another Product exist with the samr name into thew datasbase.";
                     }
-                    
+
                 }
             }
             else
             {
                 query = "PR_Add_Product";
-                parameters = new Dictionary<string, string>();;
+                parameters = new Dictionary<string, string>(); ;
                 parameters.Add("@product_name", Product_name.Text.ToString() == "" ? null : Product_name.Text.ToString());
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
                 if (error == "")
@@ -79,10 +71,10 @@ namespace ASP.NET_Exercise_02
                     {
                         lblMessage.Text = "Unable to Add Product!!! Another Product exist with the samr name into thew datasbase.";
                     }
-                    
+
                 }
             }
-            
+
         }
 
         protected void CancelBtn_Click(object sender, EventArgs e)

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {

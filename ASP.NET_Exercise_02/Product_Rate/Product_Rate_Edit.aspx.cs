@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -15,14 +15,14 @@ namespace ASP.NET_Exercise_02
             {
                 DateOfRate.Text = DateTime.Today.ToShortDateString();
                 FillDropDownList();
-                if(Request.QueryString["ID"] != null)
+                if (Request.QueryString["ID"] != null)
                 {
                     Update.Text = "Update";
                     FillData();
                 }
             }
         }
-        
+
         protected void FillDropDownList()
         {
             string query = "PR_Select_Product";
@@ -38,7 +38,7 @@ namespace ASP.NET_Exercise_02
         {
             int id = Convert.ToInt32(Request.QueryString["ID"]);
             Dictionary<string, string> str = Base_Connection_Class.Get_Rate_Record(id);
-            if(str["error"] == "")
+            if (str["error"] == "")
             {
                 SelectProduct.SelectedValue = str["value"];
                 Curr_rate.Text = Request.QueryString["rate"];
@@ -47,7 +47,7 @@ namespace ASP.NET_Exercise_02
             else
             {
                 string s = "There is some error in fetching record you selected!!";
-                lblMessage.Text =s + str["error"];
+                lblMessage.Text = s + str["error"];
             }
         }
 
@@ -65,7 +65,7 @@ namespace ASP.NET_Exercise_02
                 parameters.Add("Rate", Curr_rate.Text);
                 parameters.Add("Date", Convert.ToDateTime(DateOfRate.Text).ToString("yyyy-MM-dd"));
                 error = Base_Connection_Class.Insert_Update_Query(query, parameters);
-                if(error == "")
+                if (error == "")
                 {
                     lblMessage.Text = "Record Updated SuccessFully";
                     SelectProduct.SelectedValue = "0";
@@ -82,7 +82,7 @@ namespace ASP.NET_Exercise_02
                     {
                         lblMessage.Text = "Unable to Update Record!!!";
                     }
-                    
+
                 }
             }
             else
@@ -110,7 +110,7 @@ namespace ASP.NET_Exercise_02
                     {
                         lblMessage.Text = "Unable to Add Record!!!\n" + error;
                     }
-                    
+
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace ASP.NET_Exercise_02
             else
             {
                 FillDropDownList();
-                if(Request.QueryString["ID"] != null)
+                if (Request.QueryString["ID"] != null)
                 {
                     FillData();
                 }

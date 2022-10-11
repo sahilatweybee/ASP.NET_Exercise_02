@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ASP.NET_Exercise_02.App_Code;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.UI.WebControls;
-using ASP.NET_Exercise_02.App_Code;
 
 namespace ASP.NET_Exercise_02
 {
@@ -39,14 +39,14 @@ namespace ASP.NET_Exercise_02
             SelectProduct.DataValueField = "product_id";
             SelectProduct.DataBind();
             SelectProduct.Items.Insert(0, new ListItem("Select Product", "0"));
-            
+
         }
 
         private void FillData()
         {
             int id = Convert.ToInt32(Request.QueryString["ID"]);
             Dictionary<string, string> str = Base_Connection_Class.Get_Assigned_Record(id);
-            if(str["error"] == "")
+            if (str["error"] == "")
             {
                 SelectParty.SelectedValue = str["party"];
                 SelectProduct.SelectedValue = str["product"];
@@ -55,7 +55,7 @@ namespace ASP.NET_Exercise_02
             {
                 lblMessage.Text = "There is some error in fetching record you selected!!" + str["error"];
             }
-            
+
         }
 
         protected void UpdateAssignParty_Click(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace ASP.NET_Exercise_02
                     {
                         lblMessage.Text = "Unable to update this Record!!!\n" + error;
                     }
-                    
+
                 }
             }
             else
@@ -109,9 +109,9 @@ namespace ASP.NET_Exercise_02
                     {
                         lblMessage.Text = "Unable to Add Product!!!\n" + error;
                     }
-                    
+
                 }
-            }      
+            }
         }
 
         protected void CancelBtn_Click(object sender, EventArgs e)

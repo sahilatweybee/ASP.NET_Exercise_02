@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace ASP.NET_Exercise_02.App_Code
 {
@@ -35,7 +35,7 @@ namespace ASP.NET_Exercise_02.App_Code
             return ds;
         }
 
-        public static string Delete_Query(string query, string ParameterName ,int id)
+        public static string Delete_Query(string query, string ParameterName, int id)
         {
             SqlConnection con = null;
             try
@@ -68,7 +68,7 @@ namespace ASP.NET_Exercise_02.App_Code
                 con = new SqlConnection(ConnString);
                 SqlCommand cm = new SqlCommand(query, con);
                 cm.CommandType = CommandType.StoredProcedure;
-                foreach(var pair in parameters)
+                foreach (var pair in parameters)
                 {
                     cm.Parameters.AddWithValue(pair.Key, pair.Value);
                 }
@@ -88,7 +88,7 @@ namespace ASP.NET_Exercise_02.App_Code
 
         public static Dictionary<string, string> Get_Assigned_Record(int id)
         {
-            Dictionary<string, string>str = new Dictionary<string, string>();
+            Dictionary<string, string> str = new Dictionary<string, string>();
             SqlConnection con = null;
             try
             {
@@ -103,9 +103,9 @@ namespace ASP.NET_Exercise_02.App_Code
                 str.Add("party", party_id);
                 str.Add("product", product_id);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                excption =  e.Message;
+                excption = e.Message;
             }
             finally
             {
@@ -127,7 +127,7 @@ namespace ASP.NET_Exercise_02.App_Code
                 con.Open();
                 SqlDataReader sdr = cm.ExecuteReader();
                 sdr.Read();
-                str.Add("value",sdr["product_id"].ToString());
+                str.Add("value", sdr["product_id"].ToString());
             }
             catch (Exception e)
             {
@@ -151,7 +151,7 @@ namespace ASP.NET_Exercise_02.App_Code
                 SqlCommand product_query = new SqlCommand($"select distinct product.product_id as product_id, product.product_name as product_name from product,assign_party,rate where product.product_id=assign_party.product_id and rate.product_id=product.product_id and assign_party.party_id = {id}", con);
                 SqlDataAdapter product_adapter = new SqlDataAdapter(product_query);
                 product_adapter.Fill(dt);
-                
+
             }
             catch (Exception ex)
             {
@@ -176,7 +176,7 @@ namespace ASP.NET_Exercise_02.App_Code
                 SqlDataReader sdr = cm.ExecuteReader();
                 sdr.Read();
                 text = sdr["rate"].ToString();
-                
+
             }
             catch (Exception ex)
             {
